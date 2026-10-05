@@ -1,0 +1,37 @@
+﻿course_code,subject_code,subject_name
+CSE,CSE301,Data Structures and Algorithms
+CSE,CSE302,Database Management Systems
+CSE,CSE303,Operating Systems
+CSE,CSE304,Computer Networks
+CSE,CSE305,Artificial Intelligence
+CSE,CSE306,Software Engineering
+IT,IT301,Data Structures and Algorithms
+IT,IT302,Database Management Systems
+IT,IT303,Operating Systems
+IT,IT304,Computer Networks
+IT,IT305,Web Technologies
+IT,IT306,Information Security
+ENTC,ENTC301,Digital Electronics
+ENTC,ENTC302,Microprocessors and Microcontrollers
+ENTC,ENTC303,Communication Systems
+ENTC,ENTC304,Signals and Systems
+ENTC,ENTC305,Embedded Systems
+ENTC,ENTC306,Computer Networks
+ME,ME301,Thermodynamics
+ME,ME302,Fluid Mechanics
+ME,ME303,Manufacturing Processes
+ME,ME304,Machine Design
+ME,ME305,Heat Transfer
+ME,ME306,Industrial Engineering
+CE,CE301,Structural Analysis
+CE,CE302,Geotechnical Engineering
+CE,CE303,Fluid Mechanics
+CE,CE304,Environmental Engineering
+CE,CE305,Transportation Engineering
+CE,CE306,Construction Management
+AIDS,AIDS301,Python for Data Science
+AIDS,AIDS302,Statistics and Probability
+AIDS,AIDS303,Machine Learning
+AIDS,AIDS304,Deep Learning
+AIDS,AIDS305,Natural Language Processing
+AIDS,AIDS306,Generative AI and LLMs

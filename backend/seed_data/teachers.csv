@@ -1,0 +1,19 @@
+﻿course_code,login,full_name,email,password,subject_1_code,subject_2_code
+CSE,CSEFAC001,Dr. Priya Sharma,priya.sharma@campusmind.edu,Faculty@CSE001,CSE301,CSE302
+CSE,CSEFAC002,Prof. Rahul Mehta,rahul.mehta@campusmind.edu,Faculty@CSE002,CSE303,CSE304
+CSE,CSEFAC003,Dr. Anjali Desai,anjali.desai@campusmind.edu,Faculty@CSE003,CSE305,CSE306
+IT,ITFAC001,Dr. Sneha Patil,sneha.patil@campusmind.edu,Faculty@IT001,IT301,IT302
+IT,ITFAC002,Prof. Amit Joshi,amit.joshi@campusmind.edu,Faculty@IT002,IT303,IT304
+IT,ITFAC003,Dr. Kiran Kulkarni,kiran.kulkarni@campusmind.edu,Faculty@IT003,IT305,IT306
+ENTC,ENTCFAC001,Dr. Neha Kulkarni,neha.kulkarni@campusmind.edu,Faculty@ENTC001,ENTC301,ENTC302
+ENTC,ENTCFAC002,Prof. Sameer Deshmukh,sameer.deshmukh@campusmind.edu,Faculty@ENTC002,ENTC303,ENTC304
+ENTC,ENTCFAC003,Dr. Pooja Patil,pooja.patil@campusmind.edu,Faculty@ENTC003,ENTC305,ENTC306
+ME,MEFAC001,Dr. Akshay Patil,akshay.patil@campusmind.edu,Faculty@ME001,ME301,ME302
+ME,MEFAC002,Prof. Rohan Shinde,rohan.shinde@campusmind.edu,Faculty@ME002,ME303,ME304
+ME,MEFAC003,Dr. Snehal Joshi,snehal.joshi@campusmind.edu,Faculty@ME003,ME305,ME306
+CE,CEFAC001,Dr. Kavita Pawar,kavita.pawar@campusmind.edu,Faculty@CE001,CE301,CE302
+CE,CEFAC002,Prof. Nikhil More,nikhil.more@campusmind.edu,Faculty@CE002,CE303,CE304
+CE,CEFAC003,Dr. Swati Deshmukh,swati.deshmukh@campusmind.edu,Faculty@CE003,CE305,CE306
+AIDS,AIDSFAC001,Dr. Neha Joshi,neha.joshi@campusmind.edu,Faculty@AIDS001,AIDS301,AIDS302
+AIDS,AIDSFAC002,Prof. Arjun Patil,arjun.patil@campusmind.edu,Faculty@AIDS002,AIDS303,AIDS304
+AIDS,AIDSFAC003,Dr. Riya Kulkarni,riya.kulkarni@campusmind.edu,Faculty@AIDS003,AIDS305,AIDS306

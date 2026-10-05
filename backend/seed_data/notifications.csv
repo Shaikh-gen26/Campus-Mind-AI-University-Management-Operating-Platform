@@ -1,0 +1,31 @@
+student_number,title,message,created_at,read
+CSE202660,Attendance Alert,Your attendance in one or more subjects is approaching the minimum required level.,2026-08-12 10:00:00,false
+CSE202661,Assignment Reminder,You have pending assignments approaching their submission deadlines.,2026-08-14 09:30:00,false
+CSE202662,Grade Published,Your latest academic assessment results have been published.,2026-08-18 12:00:00,true
+CSE202663,Timetable Update,Your current class timetable is available in the student dashboard.,2026-08-20 10:00:00,true
+CSE202664,Academic Notice,A new academic announcement has been published by the institute.,2026-08-22 11:00:00,false
+IT202660,Attendance Alert,Your attendance in one or more subjects is approaching the minimum required level.,2026-08-12 10:15:00,false
+IT202661,Assignment Reminder,You have pending assignments approaching their submission deadlines.,2026-08-14 09:45:00,false
+IT202662,Grade Published,Your latest academic assessment results have been published.,2026-08-18 12:15:00,true
+IT202663,Exam Schedule,The latest examination schedule is available in your student dashboard.,2026-08-21 10:30:00,false
+IT202664,Event Reminder,A new campus event is available for students to view and attend.,2026-08-23 14:00:00,true
+ENTC202660,Attendance Alert,Your attendance in one or more subjects is approaching the minimum required level.,2026-08-12 10:30:00,false
+ENTC202661,Assignment Reminder,You have pending assignments approaching their submission deadlines.,2026-08-14 10:00:00,false
+ENTC202662,Grade Published,Your latest academic assessment results have been published.,2026-08-18 12:30:00,true
+ENTC202663,Academic Notice,A new academic announcement has been published by the institute.,2026-08-22 11:30:00,false
+ENTC202664,Exam Schedule,The latest examination schedule is available in your student dashboard.,2026-08-24 09:00:00,false
+ME202660,Attendance Alert,Your attendance in one or more subjects is approaching the minimum required level.,2026-08-12 10:45:00,false
+ME202661,Assignment Reminder,You have pending assignments approaching their submission deadlines.,2026-08-14 10:15:00,false
+ME202662,Grade Published,Your latest academic assessment results have been published.,2026-08-18 12:45:00,true
+ME202663,Timetable Update,Your current class timetable is available in the student dashboard.,2026-08-20 10:30:00,true
+ME202664,Academic Notice,A new academic announcement has been published by the institute.,2026-08-22 12:00:00,false
+CE202660,Attendance Alert,Your attendance in one or more subjects is approaching the minimum required level.,2026-08-12 11:00:00,false
+CE202661,Assignment Reminder,You have pending assignments approaching their submission deadlines.,2026-08-14 10:30:00,false
+CE202662,Grade Published,Your latest academic assessment results have been published.,2026-08-18 13:00:00,true
+CE202663,Exam Schedule,The latest examination schedule is available in your student dashboard.,2026-08-21 11:00:00,false
+CE202664,Event Reminder,A new campus event is available for students to view and attend.,2026-08-23 14:30:00,true
+AIDS202660,Attendance Alert,Your attendance in one or more subjects is approaching the minimum required level.,2026-08-12 11:15:00,false
+AIDS202661,Assignment Reminder,You have pending assignments approaching their submission deadlines.,2026-08-14 10:45:00,false
+AIDS202662,Grade Published,Your latest academic assessment results have been published.,2026-08-18 13:15:00,true
+AIDS202663,Exam Schedule,The latest examination schedule is available in your student dashboard.,2026-08-21 11:30:00,false
+AIDS202664,AI Assistant Update,My Campus-Intelligent is available to help you find relevant academic and campus information.,2026-08-25 09:00:00,true

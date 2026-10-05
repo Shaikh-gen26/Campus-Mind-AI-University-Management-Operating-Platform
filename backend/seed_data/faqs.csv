@@ -1,0 +1,46 @@
+category,question,answer,published
+Account and Login,How do I log in to Campus Mind?,Use your registered login ID and password on the Campus Mind login page. Students and course administrators should use the credentials provided by the institute.,true
+Account and Login,What should I do if I forget my password?,Contact the appropriate administrator for your account. An authorized administrator can reset the account password through the administration panel.,true
+Account and Login,Can I change my password?,Password changes should be handled through the account security options provided by the system or by contacting an authorized administrator.,true
+Account and Login,Why is my account not allowing me to log in?,Verify that your login ID and password are correct and that your account is active. If the problem continues contact the appropriate administrator.,true
+Student Profile,How can I view my student profile?,After logging in open the student dashboard and navigate to the profile section to view your registered academic information.,true
+Student Profile,Can my personal information be modified?,Some profile information may require administrator assistance. Contact the appropriate course administrator if your registered information needs to be corrected.,true
+Attendance,Where can I check my attendance?,Students can view their subject-wise attendance from the attendance section of the student dashboard.,true
+Attendance,What attendance percentage should I maintain?,Students should maintain attendance according to the institute's academic attendance requirements. The system highlights attendance that falls below the configured alert threshold.,true
+Attendance,What should I do if my attendance record is incorrect?,Contact the concerned faculty member or course administrator and provide the relevant subject and attendance date for verification.,true
+Attendance,Does Campus Mind show subject-wise attendance?,Yes. The system maintains attendance records for individual students and subjects and can display attendance information in the student dashboard.,true
+Assignments,Where can I find my assignments?,Open the assignments section of your student dashboard to view published assignments associated with your subjects.,true
+Assignments,How can I submit an assignment?,Open the relevant assignment and submit your work through the available submission option before the stated deadline.,true
+Assignments,Can I submit an assignment after the deadline?,Late submission availability depends on the academic rules and assignment configuration. Contact the concerned faculty member if you need clarification.,true
+Assignments,How can I check an assignment deadline?,The assignment listing displays the due date and time for each published assignment.,true
+Assignments,Can I see my submitted assignments?,Students can review their available assignment and submission information from the assignments section.,true
+Grades and Results,Where can I check my grades?,Open the grades or results section of your student dashboard to view your published academic scores.,true
+Grades and Results,Are all grades immediately visible?,Only grades marked as published are available to students through the academic dashboard.,true
+Grades and Results,What should I do if I think my grade is incorrect?,Contact the concerned faculty member or course administrator and provide the subject and assessment details for verification.,true
+Grades and Results,Can I view grades for individual subjects?,Yes. Grades are associated with individual subjects and assessments and can be viewed according to the published academic records.,true
+Examinations,Where can I find my exam schedule?,Open the examinations section to view scheduled examinations including subject date time and examination room.,true
+Examinations,How can I know my examination room?,The examination schedule includes the room assigned to each subject examination.,true
+Examinations,What should I carry to an examination?,Students should carry their valid student identity card and follow all examination instructions issued by the institute.,true
+Examinations,When are end semester examinations held?,End semester examinations are scheduled according to the academic calendar. Check the examination section for the latest subject-wise schedule.,true
+Timetable,Where can I view my timetable?,Students can open the timetable section of their dashboard to view their scheduled classes.,true
+Timetable,What information is available in the timetable?,The timetable provides the subject weekday start time end time room and faculty information for scheduled classes.,true
+Timetable,How can I identify the faculty for a subject?,The timetable displays the faculty assigned to each scheduled subject.,true
+Notifications,Where can I see my notifications?,Notifications can be viewed from the notification section of your Campus Mind dashboard.,true
+Notifications,Why did I receive an attendance notification?,Attendance notifications may be generated when your attendance falls below the configured attendance alert threshold or when an attendance-related update is issued.,true
+Notifications,Will I receive academic updates through Campus Mind?,The system can provide notifications for academic and administrative updates relevant to your account.,true
+Courses and Subjects,How can I see the subjects for my course?,Your course dashboard provides access to the subjects associated with your enrolled course.,true
+Courses and Subjects,Can I view information about other courses?,Available course information depends on your role and the access permissions configured by the institute.,true
+AI Assistant,What is My Campus-Intelligent?,My Campus-Intelligent is the AI assistant within Campus Mind that helps account holders find relevant information about the campus system and their available academic data.,true
+AI Assistant,What can I ask My Campus-Intelligent?,You can ask questions about available academic information such as attendance assignments grades examinations timetables announcements events and frequently asked questions.,true
+AI Assistant,Does the AI assistant use my academic information?,The assistant can use authorized academic information available to your account to provide more relevant answers. Access is restricted according to your account role.,true
+AI Assistant,Can students ask about their attendance?,Yes. A student can ask the AI assistant about their available attendance information and related academic records.,true
+AI Assistant,Can students ask about upcoming exams?,Yes. The AI assistant can provide information about upcoming examinations available within the student's authorized academic context.,true
+AI Assistant,Can the AI assistant answer questions about assignments?,Yes. It can provide information about available assignments including titles descriptions and due dates when those records are available to the account.,true
+AI Assistant,Can the AI assistant answer general campus questions?,Yes. My Campus-Intelligent can use the campus FAQ and other authorized information to answer relevant general questions.,true
+AI Assistant,Should I rely on the AI assistant for official academic decisions?,The AI assistant is an information tool. Official academic decisions should always be confirmed through the appropriate faculty member course administrator or institute authority.,true
+Academic Support,Who should I contact for an academic issue?,Contact the faculty member responsible for the relevant subject or your course administrator depending on the type of issue.,true
+Academic Support,Who should I contact about incorrect academic records?,Contact the concerned faculty member or course administrator and provide enough information to identify the affected record.,true
+Academic Support,How can I get help with my course?,Students can contact their faculty members and course administrator for academic guidance and course-related support.,true
+System Support,What should I do if Campus Mind is not loading?,Check your internet connection and try refreshing the application. If the issue continues contact the system administrator.,true
+System Support,Can I use Campus Mind on a web browser?,Yes. Campus Mind is designed as a web-based application and can be accessed through a supported modern web browser.,true
+System Support,Is my account information protected?,Access to protected Campus Mind features is controlled through authentication and role-based authorization. Do not share your password with other people.,true

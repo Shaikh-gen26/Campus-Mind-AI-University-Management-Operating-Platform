@@ -1,0 +1,108 @@
+/* Campus Mind AI — UI/UX Phase 1
+   Append this file after style.css for a visual polish pass without changing app logic.
+*/
+:root {
+  --cm-primary:#315ee7;
+  --cm-primary-dark:#244bc0;
+  --cm-primary-soft:#eef3ff;
+  --cm-text:#18243a;
+  --cm-text-soft:#66748a;
+  --cm-muted:#8a96a8;
+  --cm-border:#e7ebf2;
+  --cm-shadow-sm:0 2px 8px rgba(24,36,58,.05);
+  --cm-shadow-md:0 10px 30px rgba(24,36,58,.08);
+}
+
+html{scroll-behavior:smooth}
+body{background:radial-gradient(circle at 78% 0%,rgba(49,94,231,.035),transparent 28%),#f6f8fc;color:var(--cm-text)}
+
+.sidebar{width:260px;padding:20px 14px;background:rgba(255,255,255,.96);box-shadow:8px 0 30px rgba(24,36,58,.025)}
+.brand{padding:2px 10px 30px}
+.brand-mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#edf3ff,#e5edff);box-shadow:inset 0 0 0 1px rgba(49,94,231,.08)}
+.brand b{font-size:15px;letter-spacing:-.01em}
+.nav-item{position:relative;min-height:42px;padding:10px 12px;margin:3px 0;border-radius:11px;transition:background 160ms ease,color 160ms ease,transform 160ms ease}
+.nav-item:hover{background:#f6f8fd;color:#40516b;transform:translateX(1px)}
+.nav-item.selected{background:linear-gradient(90deg,#eef3ff,#f5f7ff);color:var(--cm-primary);box-shadow:inset 3px 0 0 var(--cm-primary)}
+
+.main{margin-left:260px}
+.topbar{height:70px;padding:0 42px;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--cm-border);position:sticky;top:0;z-index:4}
+.top-actions{padding:7px 9px;border:1px solid #edf0f5;border-radius:999px;background:#fbfcfe}
+.status-dot{box-shadow:0 0 0 4px rgba(54,179,126,.09)}
+
+.content{max-width:1380px;padding:34px 42px 48px}
+.welcome{margin-bottom:24px}
+.welcome h1{font-size:29px;letter-spacing:-.035em}
+.welcome .muted{font-size:13px}
+
+.card{border-color:var(--cm-border);border-radius:14px;box-shadow:var(--cm-shadow-sm);transition:box-shadow 180ms ease,transform 180ms ease,border-color 180ms ease}
+.stat.card:hover,.data-card.card:hover{box-shadow:var(--cm-shadow-md)}
+.stat{min-height:132px;padding:19px}
+.stat-icon{width:38px;height:38px;margin-bottom:16px;border-radius:11px;background:var(--cm-primary-soft)}
+.stat b{font-size:22px;letter-spacing:-.03em;color:#202f48}
+.stat-label{margin-bottom:6px;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+.data-card{padding:22px}
+.card-head h2,.ai-card h2{font-size:17px;letter-spacing:-.015em}
+
+.primary,.secondary,.table-action,.faq-actions button,.suggestions button{transition:transform 150ms ease,box-shadow 150ms ease,border-color 150ms ease,background 150ms ease}
+.primary{border-radius:9px;background:linear-gradient(135deg,#3c70ea,#315ee7);box-shadow:0 6px 16px rgba(49,94,231,.18)}
+.primary:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 9px 20px rgba(49,94,231,.22);background:linear-gradient(135deg,#3569e6,#294fce)}
+.secondary:hover,.table-action:hover,.faq-actions button:hover{border-color:#d2dcf0;background:#f8faff;transform:translateY(-1px)}
+.icon-btn{width:32px;height:32px;border-radius:9px}
+.icon-btn:hover{background:#f3f6fb;color:var(--cm-primary)}
+
+.search{min-width:235px;height:41px;border-radius:10px;box-shadow:0 2px 6px rgba(24,36,58,.03)}
+.search:focus-within{border-color:#b9c8ee;box-shadow:0 0 0 4px rgba(49,94,231,.07)}
+
+.table-wrap{margin-top:18px;border:1px solid #edf0f5;border-radius:11px;background:#fff}
+table{font-size:12px}
+th{padding:13px 14px;background:#f8faff;color:#69778d;font-size:10px;letter-spacing:.04em}
+td{padding:13px 14px}
+tbody tr{transition:background 140ms ease}
+tbody tr:hover{background:#fafcff}
+tbody tr:last-child td{border-bottom:0}
+.empty{padding:64px 18px;color:#8c98aa}
+
+.notice,.error{border:1px solid transparent;box-shadow:0 4px 14px rgba(24,36,58,.035)}
+.notice{border-color:#d7efdf}
+.error{border-color:#f2d8d5}
+
+.profile-card dl{grid-template-columns:180px minmax(0,1fr);row-gap:0;margin-top:20px;border:1px solid #edf0f5;border-radius:11px;overflow:hidden}
+.profile-card dt,.profile-card dd{padding:14px 16px;border-bottom:1px solid #edf0f5}
+.profile-card dt{background:#fafbfd}
+
+.modal-backdrop{background:rgba(19,31,54,.48);backdrop-filter:blur(4px)}
+.modal{width:min(680px,100%);border:1px solid rgba(255,255,255,.65);border-radius:18px;box-shadow:0 30px 90px rgba(16,32,59,.24)}
+.form-grid input,.form-grid select,.form-grid textarea{min-height:42px;border-radius:9px;border-color:#dce3ed;transition:border-color 150ms ease,box-shadow 150ms ease}
+.form-grid input:focus,.form-grid select:focus,.form-grid textarea:focus{border-color:#86a1e8;box-shadow:0 0 0 4px rgba(49,94,231,.07)}
+
+.login{background:radial-gradient(circle at 50% 0%,rgba(69,113,223,.16),transparent 34%),linear-gradient(180deg,#f5f8ff 0%,#f7f9fc 100%)}
+.login-card{width:min(440px,calc(100vw - 32px));padding:38px;border-radius:20px;box-shadow:0 28px 80px rgba(36,59,100,.11)}
+.login-card h1{font-size:25px;letter-spacing:-.035em}
+.login-card input,.ask-form input{height:44px;border-radius:9px}
+.login-card input:focus,.ask-form input:focus{border-color:#86a1e8;box-shadow:0 0 0 4px rgba(49,94,231,.07)}
+
+.ai-card{width:min(100%,980px);max-width:980px;padding:26px}
+.ai-icon{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#edf3ff,#e8efff)}
+.chat-title{align-items:center}
+.chat-history select{min-height:38px;border-radius:9px}
+.chat-messages{height:min(52vh,560px);min-height:300px;padding:18px;border-radius:14px;background:linear-gradient(180deg,#fbfcff 0%,#f7f9fd 100%)}
+.chat-message{max-width:min(78%,720px);padding:13px 15px;border-radius:13px;box-shadow:0 3px 10px rgba(24,36,58,.035)}
+.from-user{background:linear-gradient(135deg,#edf3ff,#e7efff)}
+.suggestions button{padding:8px 12px;border-radius:999px}
+.suggestions button:hover{transform:translateY(-1px);border-color:#cbd8f5;background:#f5f8ff;color:#315ee7}
+.ask-form{margin-top:17px;padding:7px;border:1px solid #e2e7ef;border-radius:13px;background:#fff;box-shadow:0 5px 18px rgba(24,36,58,.04)}
+.ask-form input{border:0;box-shadow:none!important}
+.ask-form .primary{min-width:82px}
+
+.faq-categories{padding:3px 3px 16px}
+.faq-item summary{padding:18px 5px}
+.faq-item summary:hover>span{color:var(--cm-primary)}
+.faq-answer{padding:0 5px 18px}
+
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid rgba(49,94,231,.18);outline-offset:2px}
+
+@media (max-width:1050px){.content{padding-left:28px;padding-right:28px}.topbar{padding:0 28px}}
+@media (max-width:850px){.sidebar{width:74px}.main{margin-left:74px}.topbar{padding:0 20px}.content{padding:28px 20px 40px}}
+@media (max-width:620px){.topbar{height:62px}.content{padding:22px 14px 32px}.welcome h1{font-size:24px}.search{min-width:100%}.welcome-actions{width:100%}.welcome-actions .primary,.welcome-actions .search{flex:1 1 100%}.chat-title{flex-direction:column}.chat-tools{width:100%}.chat-tools .secondary{flex:1}.chat-message{max-width:92%}.ask-form{flex-direction:row}.profile-card dl{grid-template-columns:1fr}}
+@media (max-width:430px){.stats{grid-template-columns:1fr}.login-card{padding:28px 22px}.ai-card,.data-card{padding:18px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}

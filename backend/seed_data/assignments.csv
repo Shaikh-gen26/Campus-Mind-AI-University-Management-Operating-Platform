@@ -1,0 +1,109 @@
+course_code,subject_code,title,description,due_at,max_score,published,archived,created_by_login
+CSE,CSE301,Data Structures and Algorithms - Assignment 1,Unit 1 and foundational concepts for Data Structures and Algorithms.,2026-09-17 23:59:00,100,true,false,CSEFAC001
+CSE,CSE301,Data Structures and Algorithms - Assignment 2,Applied problem solving and case study for Data Structures and Algorithms.,2026-09-24 23:59:00,100,true,false,CSEFAC001
+CSE,CSE301,Data Structures and Algorithms - Assignment 3,Practical mini project and subject application for Data Structures and Algorithms.,2026-10-01 23:59:00,100,true,false,CSEFAC001
+CSE,CSE302,Database Management Systems - Assignment 1,Unit 1 and foundational concepts for Database Management Systems.,2026-09-17 23:59:00,100,true,false,CSEFAC001
+CSE,CSE302,Database Management Systems - Assignment 2,Applied problem solving and case study for Database Management Systems.,2026-09-24 23:59:00,100,true,false,CSEFAC001
+CSE,CSE302,Database Management Systems - Assignment 3,Practical mini project and subject application for Database Management Systems.,2026-10-01 23:59:00,100,true,false,CSEFAC001
+CSE,CSE303,Operating Systems - Assignment 1,Unit 1 and foundational concepts for Operating Systems.,2026-09-17 23:59:00,100,true,false,CSEFAC001
+CSE,CSE303,Operating Systems - Assignment 2,Applied problem solving and case study for Operating Systems.,2026-09-24 23:59:00,100,true,false,CSEFAC001
+CSE,CSE303,Operating Systems - Assignment 3,Practical mini project and subject application for Operating Systems.,2026-10-01 23:59:00,100,true,false,CSEFAC001
+CSE,CSE304,Computer Networks - Assignment 1,Unit 1 and foundational concepts for Computer Networks.,2026-09-17 23:59:00,100,true,false,CSEFAC001
+CSE,CSE304,Computer Networks - Assignment 2,Applied problem solving and case study for Computer Networks.,2026-09-24 23:59:00,100,true,false,CSEFAC001
+CSE,CSE304,Computer Networks - Assignment 3,Practical mini project and subject application for Computer Networks.,2026-10-01 23:59:00,100,true,false,CSEFAC001
+CSE,CSE305,Artificial Intelligence - Assignment 1,Unit 1 and foundational concepts for Artificial Intelligence.,2026-09-17 23:59:00,100,true,false,CSEFAC001
+CSE,CSE305,Artificial Intelligence - Assignment 2,Applied problem solving and case study for Artificial Intelligence.,2026-09-24 23:59:00,100,true,false,CSEFAC001
+CSE,CSE305,Artificial Intelligence - Assignment 3,Practical mini project and subject application for Artificial Intelligence.,2026-10-01 23:59:00,100,true,false,CSEFAC001
+CSE,CSE306,Software Engineering - Assignment 1,Unit 1 and foundational concepts for Software Engineering.,2026-09-17 23:59:00,100,true,false,CSEFAC001
+CSE,CSE306,Software Engineering - Assignment 2,Applied problem solving and case study for Software Engineering.,2026-09-24 23:59:00,100,true,false,CSEFAC001
+CSE,CSE306,Software Engineering - Assignment 3,Practical mini project and subject application for Software Engineering.,2026-10-01 23:59:00,100,true,false,CSEFAC001
+IT,IT301,Data Structures and Algorithms - Assignment 1,Unit 1 and foundational concepts for Data Structures and Algorithms.,2026-09-17 23:59:00,100,true,false,ITFAC001
+IT,IT301,Data Structures and Algorithms - Assignment 2,Applied problem solving and case study for Data Structures and Algorithms.,2026-09-24 23:59:00,100,true,false,ITFAC001
+IT,IT301,Data Structures and Algorithms - Assignment 3,Practical mini project and subject application for Data Structures and Algorithms.,2026-10-01 23:59:00,100,true,false,ITFAC001
+IT,IT302,Database Management Systems - Assignment 1,Unit 1 and foundational concepts for Database Management Systems.,2026-09-17 23:59:00,100,true,false,ITFAC001
+IT,IT302,Database Management Systems - Assignment 2,Applied problem solving and case study for Database Management Systems.,2026-09-24 23:59:00,100,true,false,ITFAC001
+IT,IT302,Database Management Systems - Assignment 3,Practical mini project and subject application for Database Management Systems.,2026-10-01 23:59:00,100,true,false,ITFAC001
+IT,IT303,Operating Systems - Assignment 1,Unit 1 and foundational concepts for Operating Systems.,2026-09-17 23:59:00,100,true,false,ITFAC001
+IT,IT303,Operating Systems - Assignment 2,Applied problem solving and case study for Operating Systems.,2026-09-24 23:59:00,100,true,false,ITFAC001
+IT,IT303,Operating Systems - Assignment 3,Practical mini project and subject application for Operating Systems.,2026-10-01 23:59:00,100,true,false,ITFAC001
+IT,IT304,Computer Networks - Assignment 1,Unit 1 and foundational concepts for Computer Networks.,2026-09-17 23:59:00,100,true,false,ITFAC001
+IT,IT304,Computer Networks - Assignment 2,Applied problem solving and case study for Computer Networks.,2026-09-24 23:59:00,100,true,false,ITFAC001
+IT,IT304,Computer Networks - Assignment 3,Practical mini project and subject application for Computer Networks.,2026-10-01 23:59:00,100,true,false,ITFAC001
+IT,IT305,Web Technologies - Assignment 1,Unit 1 and foundational concepts for Web Technologies.,2026-09-17 23:59:00,100,true,false,ITFAC001
+IT,IT305,Web Technologies - Assignment 2,Applied problem solving and case study for Web Technologies.,2026-09-24 23:59:00,100,true,false,ITFAC001
+IT,IT305,Web Technologies - Assignment 3,Practical mini project and subject application for Web Technologies.,2026-10-01 23:59:00,100,true,false,ITFAC001
+IT,IT306,Information Security - Assignment 1,Unit 1 and foundational concepts for Information Security.,2026-09-17 23:59:00,100,true,false,ITFAC001
+IT,IT306,Information Security - Assignment 2,Applied problem solving and case study for Information Security.,2026-09-24 23:59:00,100,true,false,ITFAC001
+IT,IT306,Information Security - Assignment 3,Practical mini project and subject application for Information Security.,2026-10-01 23:59:00,100,true,false,ITFAC001
+ENTC,ENTC301,Digital Electronics - Assignment 1,Unit 1 and foundational concepts for Digital Electronics.,2026-09-17 23:59:00,100,true,false,ENTCFAC001
+ENTC,ENTC301,Digital Electronics - Assignment 2,Applied problem solving and case study for Digital Electronics.,2026-09-24 23:59:00,100,true,false,ENTCFAC001
+ENTC,ENTC301,Digital Electronics - Assignment 3,Practical mini project and subject application for Digital Electronics.,2026-10-01 23:59:00,100,true,false,ENTCFAC001
+ENTC,ENTC302,Microprocessors and Microcontrollers - Assignment 1,Unit 1 and foundational concepts for Microprocessors and Microcontrollers.,2026-09-17 23:59:00,100,true,false,ENTCFAC001
+ENTC,ENTC302,Microprocessors and Microcontrollers - Assignment 2,Applied problem solving and case study for Microprocessors and Microcontrollers.,2026-09-24 23:59:00,100,true,false,ENTCFAC001
+ENTC,ENTC302,Microprocessors and Microcontrollers - Assignment 3,Practical mini project and subject application for Microprocessors and Microcontrollers.,2026-10-01 23:59:00,100,true,false,ENTCFAC001
+ENTC,ENTC303,Communication Systems - Assignment 1,Unit 1 and foundational concepts for Communication Systems.,2026-09-17 23:59:00,100,true,false,ENTCFAC001
+ENTC,ENTC303,Communication Systems - Assignment 2,Applied problem solving and case study for Communication Systems.,2026-09-24 23:59:00,100,true,false,ENTCFAC001
+ENTC,ENTC303,Communication Systems - Assignment 3,Practical mini project and subject application for Communication Systems.,2026-10-01 23:59:00,100,true,false,ENTCFAC001
+ENTC,ENTC304,Signals and Systems - Assignment 1,Unit 1 and foundational concepts for Signals and Systems.,2026-09-17 23:59:00,100,true,false,ENTCFAC001
+ENTC,ENTC304,Signals and Systems - Assignment 2,Applied problem solving and case study for Signals and Systems.,2026-09-24 23:59:00,100,true,false,ENTCFAC001
+ENTC,ENTC304,Signals and Systems - Assignment 3,Practical mini project and subject application for Signals and Systems.,2026-10-01 23:59:00,100,true,false,ENTCFAC001
+ENTC,ENTC305,Embedded Systems - Assignment 1,Unit 1 and foundational concepts for Embedded Systems.,2026-09-17 23:59:00,100,true,false,ENTCFAC001
+ENTC,ENTC305,Embedded Systems - Assignment 2,Applied problem solving and case study for Embedded Systems.,2026-09-24 23:59:00,100,true,false,ENTCFAC001
+ENTC,ENTC305,Embedded Systems - Assignment 3,Practical mini project and subject application for Embedded Systems.,2026-10-01 23:59:00,100,true,false,ENTCFAC001
+ENTC,ENTC306,Computer Networks - Assignment 1,Unit 1 and foundational concepts for Computer Networks.,2026-09-17 23:59:00,100,true,false,ENTCFAC001
+ENTC,ENTC306,Computer Networks - Assignment 2,Applied problem solving and case study for Computer Networks.,2026-09-24 23:59:00,100,true,false,ENTCFAC001
+ENTC,ENTC306,Computer Networks - Assignment 3,Practical mini project and subject application for Computer Networks.,2026-10-01 23:59:00,100,true,false,ENTCFAC001
+ME,ME301,Thermodynamics - Assignment 1,Unit 1 and foundational concepts for Thermodynamics.,2026-09-17 23:59:00,100,true,false,MEFAC001
+ME,ME301,Thermodynamics - Assignment 2,Applied problem solving and case study for Thermodynamics.,2026-09-24 23:59:00,100,true,false,MEFAC001
+ME,ME301,Thermodynamics - Assignment 3,Practical mini project and subject application for Thermodynamics.,2026-10-01 23:59:00,100,true,false,MEFAC001
+ME,ME302,Fluid Mechanics - Assignment 1,Unit 1 and foundational concepts for Fluid Mechanics.,2026-09-17 23:59:00,100,true,false,MEFAC001
+ME,ME302,Fluid Mechanics - Assignment 2,Applied problem solving and case study for Fluid Mechanics.,2026-09-24 23:59:00,100,true,false,MEFAC001
+ME,ME302,Fluid Mechanics - Assignment 3,Practical mini project and subject application for Fluid Mechanics.,2026-10-01 23:59:00,100,true,false,MEFAC001
+ME,ME303,Manufacturing Processes - Assignment 1,Unit 1 and foundational concepts for Manufacturing Processes.,2026-09-17 23:59:00,100,true,false,MEFAC001
+ME,ME303,Manufacturing Processes - Assignment 2,Applied problem solving and case study for Manufacturing Processes.,2026-09-24 23:59:00,100,true,false,MEFAC001
+ME,ME303,Manufacturing Processes - Assignment 3,Practical mini project and subject application for Manufacturing Processes.,2026-10-01 23:59:00,100,true,false,MEFAC001
+ME,ME304,Machine Design - Assignment 1,Unit 1 and foundational concepts for Machine Design.,2026-09-17 23:59:00,100,true,false,MEFAC001
+ME,ME304,Machine Design - Assignment 2,Applied problem solving and case study for Machine Design.,2026-09-24 23:59:00,100,true,false,MEFAC001
+ME,ME304,Machine Design - Assignment 3,Practical mini project and subject application for Machine Design.,2026-10-01 23:59:00,100,true,false,MEFAC001
+ME,ME305,Heat Transfer - Assignment 1,Unit 1 and foundational concepts for Heat Transfer.,2026-09-17 23:59:00,100,true,false,MEFAC001
+ME,ME305,Heat Transfer - Assignment 2,Applied problem solving and case study for Heat Transfer.,2026-09-24 23:59:00,100,true,false,MEFAC001
+ME,ME305,Heat Transfer - Assignment 3,Practical mini project and subject application for Heat Transfer.,2026-10-01 23:59:00,100,true,false,MEFAC001
+ME,ME306,Industrial Engineering - Assignment 1,Unit 1 and foundational concepts for Industrial Engineering.,2026-09-17 23:59:00,100,true,false,MEFAC001
+ME,ME306,Industrial Engineering - Assignment 2,Applied problem solving and case study for Industrial Engineering.,2026-09-24 23:59:00,100,true,false,MEFAC001
+ME,ME306,Industrial Engineering - Assignment 3,Practical mini project and subject application for Industrial Engineering.,2026-10-01 23:59:00,100,true,false,MEFAC001
+CE,CE301,Structural Analysis - Assignment 1,Unit 1 and foundational concepts for Structural Analysis.,2026-09-17 23:59:00,100,true,false,CEFAC001
+CE,CE301,Structural Analysis - Assignment 2,Applied problem solving and case study for Structural Analysis.,2026-09-24 23:59:00,100,true,false,CEFAC001
+CE,CE301,Structural Analysis - Assignment 3,Practical mini project and subject application for Structural Analysis.,2026-10-01 23:59:00,100,true,false,CEFAC001
+CE,CE302,Geotechnical Engineering - Assignment 1,Unit 1 and foundational concepts for Geotechnical Engineering.,2026-09-17 23:59:00,100,true,false,CEFAC001
+CE,CE302,Geotechnical Engineering - Assignment 2,Applied problem solving and case study for Geotechnical Engineering.,2026-09-24 23:59:00,100,true,false,CEFAC001
+CE,CE302,Geotechnical Engineering - Assignment 3,Practical mini project and subject application for Geotechnical Engineering.,2026-10-01 23:59:00,100,true,false,CEFAC001
+CE,CE303,Fluid Mechanics - Assignment 1,Unit 1 and foundational concepts for Fluid Mechanics.,2026-09-17 23:59:00,100,true,false,CEFAC001
+CE,CE303,Fluid Mechanics - Assignment 2,Applied problem solving and case study for Fluid Mechanics.,2026-09-24 23:59:00,100,true,false,CEFAC001
+CE,CE303,Fluid Mechanics - Assignment 3,Practical mini project and subject application for Fluid Mechanics.,2026-10-01 23:59:00,100,true,false,CEFAC001
+CE,CE304,Environmental Engineering - Assignment 1,Unit 1 and foundational concepts for Environmental Engineering.,2026-09-17 23:59:00,100,true,false,CEFAC001
+CE,CE304,Environmental Engineering - Assignment 2,Applied problem solving and case study for Environmental Engineering.,2026-09-24 23:59:00,100,true,false,CEFAC001
+CE,CE304,Environmental Engineering - Assignment 3,Practical mini project and subject application for Environmental Engineering.,2026-10-01 23:59:00,100,true,false,CEFAC001
+CE,CE305,Transportation Engineering - Assignment 1,Unit 1 and foundational concepts for Transportation Engineering.,2026-09-17 23:59:00,100,true,false,CEFAC001
+CE,CE305,Transportation Engineering - Assignment 2,Applied problem solving and case study for Transportation Engineering.,2026-09-24 23:59:00,100,true,false,CEFAC001
+CE,CE305,Transportation Engineering - Assignment 3,Practical mini project and subject application for Transportation Engineering.,2026-10-01 23:59:00,100,true,false,CEFAC001
+CE,CE306,Construction Management - Assignment 1,Unit 1 and foundational concepts for Construction Management.,2026-09-17 23:59:00,100,true,false,CEFAC001
+CE,CE306,Construction Management - Assignment 2,Applied problem solving and case study for Construction Management.,2026-09-24 23:59:00,100,true,false,CEFAC001
+CE,CE306,Construction Management - Assignment 3,Practical mini project and subject application for Construction Management.,2026-10-01 23:59:00,100,true,false,CEFAC001
+AIDS,AIDS301,Python for Data Science - Assignment 1,Unit 1 and foundational concepts for Python for Data Science.,2026-09-17 23:59:00,100,true,false,AIDSFAC001
+AIDS,AIDS301,Python for Data Science - Assignment 2,Applied problem solving and case study for Python for Data Science.,2026-09-24 23:59:00,100,true,false,AIDSFAC001
+AIDS,AIDS301,Python for Data Science - Assignment 3,Practical mini project and subject application for Python for Data Science.,2026-10-01 23:59:00,100,true,false,AIDSFAC001
+AIDS,AIDS302,Statistics and Probability - Assignment 1,Unit 1 and foundational concepts for Statistics and Probability.,2026-09-17 23:59:00,100,true,false,AIDSFAC001
+AIDS,AIDS302,Statistics and Probability - Assignment 2,Applied problem solving and case study for Statistics and Probability.,2026-09-24 23:59:00,100,true,false,AIDSFAC001
+AIDS,AIDS302,Statistics and Probability - Assignment 3,Practical mini project and subject application for Statistics and Probability.,2026-10-01 23:59:00,100,true,false,AIDSFAC001
+AIDS,AIDS303,Machine Learning - Assignment 1,Unit 1 and foundational concepts for Machine Learning.,2026-09-17 23:59:00,100,true,false,AIDSFAC001
+AIDS,AIDS303,Machine Learning - Assignment 2,Applied problem solving and case study for Machine Learning.,2026-09-24 23:59:00,100,true,false,AIDSFAC001
+AIDS,AIDS303,Machine Learning - Assignment 3,Practical mini project and subject application for Machine Learning.,2026-10-01 23:59:00,100,true,false,AIDSFAC001
+AIDS,AIDS304,Deep Learning - Assignment 1,Unit 1 and foundational concepts for Deep Learning.,2026-09-17 23:59:00,100,true,false,AIDSFAC001
+AIDS,AIDS304,Deep Learning - Assignment 2,Applied problem solving and case study for Deep Learning.,2026-09-24 23:59:00,100,true,false,AIDSFAC001
+AIDS,AIDS304,Deep Learning - Assignment 3,Practical mini project and subject application for Deep Learning.,2026-10-01 23:59:00,100,true,false,AIDSFAC001
+AIDS,AIDS305,Natural Language Processing - Assignment 1,Unit 1 and foundational concepts for Natural Language Processing.,2026-09-17 23:59:00,100,true,false,AIDSFAC001
+AIDS,AIDS305,Natural Language Processing - Assignment 2,Applied problem solving and case study for Natural Language Processing.,2026-09-24 23:59:00,100,true,false,AIDSFAC001
+AIDS,AIDS305,Natural Language Processing - Assignment 3,Practical mini project and subject application for Natural Language Processing.,2026-10-01 23:59:00,100,true,false,AIDSFAC001
+AIDS,AIDS306,Generative AI and LLMs - Assignment 1,Unit 1 and foundational concepts for Generative AI and LLMs.,2026-09-17 23:59:00,100,true,false,AIDSFAC001
+AIDS,AIDS306,Generative AI and LLMs - Assignment 2,Applied problem solving and case study for Generative AI and LLMs.,2026-09-24 23:59:00,100,true,false,AIDSFAC001
+AIDS,AIDS306,Generative AI and LLMs - Assignment 3,Practical mini project and subject application for Generative AI and LLMs.,2026-10-01 23:59:00,100,true,false,AIDSFAC001

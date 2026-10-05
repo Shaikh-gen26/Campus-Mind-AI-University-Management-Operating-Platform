@@ -1,0 +1,37 @@
+course_code,subject_code,title,starts_at,room,status
+CSE,CSE301,End Semester Examination - Data Structures and Algorithms,2026-12-01 09:00:00,Room CSE-101,scheduled
+CSE,CSE302,End Semester Examination - Database Management Systems,2026-12-03 09:00:00,Room CSE-102,scheduled
+CSE,CSE303,End Semester Examination - Operating Systems,2026-12-05 09:00:00,Room CSE-103,scheduled
+CSE,CSE304,End Semester Examination - Computer Networks,2026-12-08 09:00:00,Room CSE-104,scheduled
+CSE,CSE305,End Semester Examination - Artificial Intelligence,2026-12-10 09:00:00,Room CSE-105,scheduled
+CSE,CSE306,End Semester Examination - Software Engineering,2026-12-12 09:00:00,Room CSE-106,scheduled
+IT,IT301,End Semester Examination - Data Structures and Algorithms,2026-12-01 14:00:00,Room IT-101,scheduled
+IT,IT302,End Semester Examination - Database Management Systems,2026-12-03 14:00:00,Room IT-102,scheduled
+IT,IT303,End Semester Examination - Operating Systems,2026-12-05 14:00:00,Room IT-103,scheduled
+IT,IT304,End Semester Examination - Computer Networks,2026-12-08 14:00:00,Room IT-104,scheduled
+IT,IT305,End Semester Examination - Web Technologies,2026-12-10 14:00:00,Room IT-105,scheduled
+IT,IT306,End Semester Examination - Information Security,2026-12-12 14:00:00,Room IT-106,scheduled
+ENTC,ENTC301,End Semester Examination - Digital Electronics,2026-12-02 09:00:00,Room ENTC-101,scheduled
+ENTC,ENTC302,End Semester Examination - Microprocessors and Microcontrollers,2026-12-04 09:00:00,Room ENTC-102,scheduled
+ENTC,ENTC303,End Semester Examination - Communication Systems,2026-12-07 09:00:00,Room ENTC-103,scheduled
+ENTC,ENTC304,End Semester Examination - Signals and Systems,2026-12-09 09:00:00,Room ENTC-104,scheduled
+ENTC,ENTC305,End Semester Examination - Embedded Systems,2026-12-11 09:00:00,Room ENTC-105,scheduled
+ENTC,ENTC306,End Semester Examination - Computer Networks,2026-12-14 09:00:00,Room ENTC-106,scheduled
+ME,ME301,End Semester Examination - Thermodynamics,2026-12-02 14:00:00,Room ME-101,scheduled
+ME,ME302,End Semester Examination - Fluid Mechanics,2026-12-04 14:00:00,Room ME-102,scheduled
+ME,ME303,End Semester Examination - Manufacturing Processes,2026-12-07 14:00:00,Room ME-103,scheduled
+ME,ME304,End Semester Examination - Machine Design,2026-12-09 14:00:00,Room ME-104,scheduled
+ME,ME305,End Semester Examination - Heat Transfer,2026-12-11 14:00:00,Room ME-105,scheduled
+ME,ME306,End Semester Examination - Industrial Engineering,2026-12-14 14:00:00,Room ME-106,scheduled
+CE,CE301,End Semester Examination - Structural Analysis,2026-12-15 09:00:00,Room CE-101,scheduled
+CE,CE302,End Semester Examination - Geotechnical Engineering,2026-12-17 09:00:00,Room CE-102,scheduled
+CE,CE303,End Semester Examination - Fluid Mechanics,2026-12-19 09:00:00,Room CE-103,scheduled
+CE,CE304,End Semester Examination - Environmental Engineering,2026-12-22 09:00:00,Room CE-104,scheduled
+CE,CE305,End Semester Examination - Transportation Engineering,2026-12-24 09:00:00,Room CE-105,scheduled
+CE,CE306,End Semester Examination - Construction Management,2026-12-26 09:00:00,Room CE-106,scheduled
+AIDS,AIDS301,End Semester Examination - Python for Data Science,2026-12-15 14:00:00,Room AIDS-101,scheduled
+AIDS,AIDS302,End Semester Examination - Statistics and Probability,2026-12-17 14:00:00,Room AIDS-102,scheduled
+AIDS,AIDS303,End Semester Examination - Machine Learning,2026-12-19 14:00:00,Room AIDS-103,scheduled
+AIDS,AIDS304,End Semester Examination - Deep Learning,2026-12-22 14:00:00,Room AIDS-104,scheduled
+AIDS,AIDS305,End Semester Examination - Natural Language Processing,2026-12-24 14:00:00,Room AIDS-105,scheduled
+AIDS,AIDS306,End Semester Examination - Generative AI and LLMs,2026-12-26 14:00:00,Room AIDS-106,scheduled

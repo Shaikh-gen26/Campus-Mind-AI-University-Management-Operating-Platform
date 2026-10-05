@@ -1,0 +1,26 @@
+# Python
+backend/.venv/
+backend/__pycache__/
+backend/app/__pycache__/
+backend/**/*.pyc
+
+# Environment / secrets
+backend/.env
+deploy/.env
+deploy/.env.production
+.env
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# Generated / local backups
+backend/app/seed_backup.py
+backend/seed_data/submissions_backup.csv
+backend/seed_data/submissions.csv.bad
+backend/seed_data/submissions.csv.before_ce_fix
+
+# OS / editor
+.vscode/
+.DS_Store
+Thumbs.db

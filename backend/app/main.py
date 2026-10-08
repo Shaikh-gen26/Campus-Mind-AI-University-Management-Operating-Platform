@@ -1,8 +1,19 @@
 
-from .intelligence import get_course_intelligence
+from .intelligence import (
+    get_course_intelligence,
+    get_student_intelligence,
+    get_risk_intelligence,
+)
+from .ai.memory import (
+    load_conversation,
+    load_history,
+    save_exchange,
+)
+
 from datetime import datetime
 import json
 import logging
+import re
 from urllib.error import HTTPError, URLError
 from urllib.request import Request as URLRequest, urlopen
 from fastapi import Depends, FastAPI, HTTPException, Query, Request, Response
@@ -1372,7 +1383,18 @@ def intelligence_overview(
     db: Session = Depends(get_db),
     user: models.User = Depends(current_user),
 ):
+    if user.role == "student":
+        return get_student_intelligence(db, user)
+
     return get_course_intelligence(db, user)
+
+
+@app.get("/api/intelligence/risk")
+def intelligence_risk(
+    db: Session = Depends(get_db),
+    user: models.User = Depends(current_user),
+):
+    return get_risk_intelligence(db, user)
 
 
 
@@ -1380,25 +1402,17 @@ def intelligence_overview(
 def ask(
     data: schemas.Ask, db: Session = Depends(get_db), user: models.User = Depends(current_user)
 ):
-    timetable_rows = []
-    # Retrieved campus facts are public-to-authenticated FAQ records. Academic context is self-only.
-    import re
-
-    conv = db.get(models.AIConversation, data.conversation_id) if data.conversation_id else None
-    if conv and conv.user_id != user.id:
-        raise HTTPException(404, "Conversation not found")
-    if conv and conv.kind != data.kind:
-        raise HTTPException(422, "Conversation mode cannot be changed")
-    history = (
-        db.scalars(
-            select(models.AIMessage)
-            .where(models.AIMessage.conversation_id == conv.id)
-            .order_by(models.AIMessage.id)
-            .limit(12)
-        ).all()
-        if conv
-        else []
+    
+    conv = load_conversation(
+        db=db,
+        user=user,
+        conversation_id=data.conversation_id,
+        kind=data.kind,
     )
+
+    history = load_history(db=db, conversation=conv)
+    
+    
     stop = {
         "what",
         "when",
@@ -1440,6 +1454,20 @@ def ask(
     academic_response = ""
     authorization_denied = False 
     question_terms = set(re.findall(r"[a-z0-9]+", data.question.lower()))
+    # ---------------------------------------------------------
+    # Initialize database-grounded query variables
+    # These are used by deterministic AI queries for all roles.
+    # ---------------------------------------------------------
+    attendance_rows = []
+    assignment_rows = []
+    grade_rows = []
+    student_rows = []
+    assigned_subject_ids = []
+    assigned_subject_names = []
+    course = None
+    student_count = 0
+    
+    
     if user.role == "super_admin":
         course_rows = db.execute(
             select(models.Course.code, func.count(models.Student.id))
@@ -1447,10 +1475,127 @@ def ask(
             .group_by(models.Course.id, models.Course.code)
         ).all()
         student_count = sum(int(row[1]) for row in course_rows)
+        
+        
+        
+        # ---------------------------------------------------------
+        # University-wide academic data for deterministic queries
+        # ---------------------------------------------------------
+
+        student_rows = db.execute(
+            select(
+                models.Student.id,
+                models.Student.student_number,
+                models.Student.full_name,
+                models.Student.email,
+                models.Student.year,
+            )
+            .order_by(models.Student.full_name)
+        ).all()
+
+        assigned_subject_rows = db.execute(
+            select(
+                models.Subject.id,
+                models.Subject.code,
+                models.Subject.name,
+            )
+            .order_by(models.Subject.code)
+        ).all()
+
+        assigned_subject_ids = [
+            row[0] for row in assigned_subject_rows
+        ]
+
+        assigned_subject_names = [
+            f"{row[1]} - {row[2]}"
+            for row in assigned_subject_rows
+        ]
+
+        attendance_rows = db.execute(
+            select(
+                models.Student.id,
+                models.Student.full_name,
+                models.Subject.id,
+                models.Subject.name,
+                func.count(models.Attendance.id),
+                func.sum(
+                    case(
+                        (models.Attendance.present.is_(True), 1),
+                        else_=0,
+                    )
+                ),
+            )
+            .join(
+                models.Attendance,
+                models.Attendance.student_id == models.Student.id,
+            )
+            .join(
+                models.Subject,
+                models.Subject.id == models.Attendance.subject_id,
+            )
+            .group_by(
+                models.Student.id,
+                models.Student.full_name,
+                models.Subject.id,
+                models.Subject.name,
+            )
+            .order_by(
+                models.Student.full_name,
+                models.Subject.name,
+            )
+        ).all()
+
+        assignment_rows = db.execute(
+            select(
+                models.Assignment.id,
+                models.Assignment.title,
+                models.Assignment.due_at,
+                models.Subject.name,
+            )
+            .join(
+                models.Subject,
+                models.Subject.id == models.Assignment.subject_id,
+            )
+            .where(
+                models.Assignment.published.is_(True),
+                models.Assignment.archived.is_(False),
+            )
+            .order_by(models.Assignment.due_at.desc())
+        ).all()
+
+        grade_rows = db.execute(
+            select(
+                models.Student.id,
+                models.Student.full_name,
+                models.Subject.name,
+                models.Grade.assessment,
+                models.Grade.score,
+                models.Grade.max_score,
+            )
+            .join(
+                models.Student,
+                models.Student.id == models.Grade.student_id,
+            )
+            .join(
+                models.Subject,
+                models.Subject.id == models.Grade.subject_id,
+            )
+            .where(
+                models.Grade.published.is_(True),
+            )
+            .order_by(
+                models.Student.full_name,
+                models.Subject.name,
+            )
+        ).all()
+        
+        
+        
         context += (
             f"\n\nAuthorized university context: {student_count} enrolled students across {len(course_rows)} courses; {db.scalar(select(func.count(models.User.id)).where(models.User.role == 'course_admin', models.User.active.is_(True)))} active Course Admin accounts. Enrollment: "
             + ", ".join(f"{code} {count}" for code, count in course_rows)
         )
+        
         if question_terms & {
             "student",
             "students",
@@ -2774,17 +2919,17 @@ def ask(
         answer = "Based on published campus information: " + " ".join(f.answer for f in relevant)
     else:
         answer = "I couldn't find an authoritative answer in published campus information. Please contact your course office or university administration to confirm."
-    if not conv:
-        conv = models.AIConversation(user_id=user.id, kind=data.kind)
-        db.add(conv)
-        db.flush()
-    db.add_all(
-        [
-            models.AIMessage(conversation_id=conv.id, role="user", content=data.question),
-            models.AIMessage(conversation_id=conv.id, role="assistant", content=answer),
-        ]
+    
+        
+    conv = save_exchange(
+        db=db,
+        user=user,
+        conversation=conv,
+        kind=data.kind,
+        question=data.question,
+        answer=answer,
     )
-    db.commit()
+        
     return {
         "conversation_id": conv.id,
         "answer": answer,

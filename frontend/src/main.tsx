@@ -75,7 +75,7 @@ const icons: Record<string, React.ReactNode> = {
   FAQs: <CircleHelp />,
   Administrators: <ShieldCheck />,
   Analytics: <Activity />,
-  'CampusMind AI': <MessageCircle />,
+  
   'My Campus-Intelligent': <CircleHelp />,
 };
 
@@ -121,6 +121,38 @@ const pretty = (v: unknown) =>
         ? new Date(String(v)).toLocaleString()
         : String(v);
 
+function IntelligenceBar({
+  label,
+  value,
+  suffix = '%',
+}: {
+  label: string;
+  value: number;
+  suffix?: string;
+}) {
+  const safeValue = Math.max(0, Math.min(100, Number(value) || 0));
+
+  return (
+    <div className="intelligence-bar-row">
+      <div className="intelligence-bar-label">
+        <span>{label}</span>
+        <b>
+          {Number(value || 0).toFixed(1)}
+          {suffix}
+        </b>
+      </div>
+
+      <div className="intelligence-bar-track">
+        <div
+          className="intelligence-bar-fill"
+          style={{ width: `${safeValue}%` }}
+        />
+      </div>
+    </div>
+  );
+}
+
+
 function App() {
   const [token, setToken] = useState('session-check');
   const [user, setUser] = useState<User | null>(null);
@@ -128,6 +160,8 @@ function App() {
   const [password, setPassword] = useState('');
   const [page, setPage] = useState('Overview');
   const [data, setData] = useState<any>(null);
+  const [intelligence, setIntelligence] = useState<any>(null);
+  const [riskIntelligence, setRiskIntelligence] = useState<any>(null);
   const [booting, setBooting] = useState(true);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
@@ -164,6 +198,15 @@ function App() {
             : '';
       const result = await api(path + suffix, token);
       setData(result);
+
+      if (page === 'Overview') {
+        const intelligenceResult = await api('/intelligence/overview', token);
+        setIntelligence(intelligenceResult);
+
+        const riskResult = await api('/intelligence/risk', token);
+          setRiskIntelligence(riskResult);  
+      }
+
       if (page === 'Overview') {
         const extras =
           user.role === 'super_admin'
@@ -209,8 +252,8 @@ function App() {
         .catch(() => setUnreadCount(0));
   }, [token, page, data]);
   useEffect(() => {
-    if (!token || !['CampusMind AI', 'My Campus-Intelligent'].includes(page)) return;
-    const mode = page === 'CampusMind AI' ? 'academic' : 'campus';
+    if (!token || !['My Campus-Intelligent'].includes(page)) return;
+    const mode = page === 'My Campus-Intelligent' ? 'academic': 'campus';
     setKind(mode);
     api('/conversations', token)
       .then((all: any[]) => setChatHistory(all.filter((c) => c.kind === mode)))
@@ -255,7 +298,7 @@ function App() {
             'Events',
             'Notifications',
             'FAQs',
-            'CampusMind AI',
+            
             'My Campus-Intelligent',
           ]
         : user?.role === 'course_admin'
@@ -274,7 +317,7 @@ function App() {
               'Announcements',
               'Notifications',
               'FAQs',
-              'CampusMind AI',
+              
               'My Campus-Intelligent',
             ]
           : [
@@ -295,7 +338,7 @@ function App() {
               'Notifications',
               'FAQs',
               'Analytics',
-              'CampusMind AI',
+              
               'My Campus-Intelligent',
             ],
     [user]
@@ -789,8 +832,8 @@ function App() {
     setPage(name);
     setError('');
     if (name === 'Students') setStudentOffset(0);
-    if (name === 'CampusMind AI' || name === 'My Campus-Intelligent') {
-      setKind(name === 'CampusMind AI' ? 'academic' : 'campus');
+    if ( name === 'My Campus-Intelligent') {
+      setKind(name === 'My Campus-Intelligent' ? 'academic': 'campus');
       setConversationId(null);
       setChatMessages([]);
       setChatSources([]);
@@ -870,6 +913,62 @@ function App() {
   const action = actionFor(page);
   const rows: any[] = Array.isArray(data) ? data : page === 'Analytics' ? data?.courses || [] : [];
   const dashboard = data && typeof data === 'object' && !Array.isArray(data) ? data : {};
+
+  const intelligenceData = intelligence || {};
+
+const intelligenceAttendance =
+  Number(intelligenceData.attendance?.average || 0);
+
+const intelligencePerformance =
+  Number(intelligenceData.performance?.average || 0);
+
+const intelligenceAtRisk =
+  Number(intelligenceData.attendance?.below_75 || 0);
+
+const intelligenceStudents =
+  Number(intelligenceData.students || 0);
+
+const intelligenceSubjects =
+  Number(intelligenceData.subjects || 0);
+
+const intelligenceAssignments =
+  Number(intelligenceData.assignments?.total || 0);
+
+const intelligenceSubmissionRate =
+  Number(intelligenceData.assignments?.submission_rate || 0);
+
+const intelligenceAttendanceSubjects =
+  intelligenceData.attendance?.by_subject || [];
+
+const intelligencePerformanceSubjects =
+  intelligenceData.performance?.by_subject || [];
+
+const intelligenceInsights =
+  intelligenceData.insights || [];
+
+
+const riskData = riskIntelligence || {};
+
+const highRiskStudents =
+  riskData.students?.filter(
+    (student: any) => student.risk_level === 'High'
+  ) || [];
+
+const mediumRiskStudents =
+  riskData.students?.filter(
+    (student: any) => student.risk_level === 'Medium'
+  ) || [];
+
+const highRiskCount =
+  Number(riskData.high_risk || 0);
+
+const mediumRiskCount =
+  Number(riskData.medium_risk || 0);
+
+const lowRiskCount =
+  Number(riskData.low_risk || 0);
+
+
   const dashboardCards =
     user.role === 'student'
       ? [
@@ -1026,17 +1125,17 @@ function App() {
               {notice}
             </div>
           )}
-          {['CampusMind AI', 'My Campus-Intelligent'].includes(page) ? (
+          {['My Campus-Intelligent'].includes(page) ? (
             <div className="card ai-card">
               <div className="ai-icon">
                 <MessageCircle />
               </div>
               <div className="chat-title">
                 <div>
-                  <h2>{page === 'CampusMind AI' ? 'CampusMind AI' : 'My Campus-Intelligent'}</h2>
+                  <h2>{page === 'My Campus-Intelligent'}</h2>
                   <p className="muted">
                     {kind === 'academic'
-                      ? 'Your academic assistant. Personal context is limited to your own authorized records.'
+                      ? 'Your personalized campus intelligence assistant. Ask about your attendance, grades, assignments, and academic improvement priorities.'
                       : 'Your university-aware assistant for campus information, services, and application workflows.'}
                   </p>
                 </div>
@@ -1089,11 +1188,7 @@ function App() {
                       key={`${i}-${m.created_at}`}
                     >
                       <span className="message-label">
-                        {m.role === 'user'
-                          ? 'You'
-                          : page === 'CampusMind AI'
-                            ? 'CampusMind AI'
-                            : 'My Campus-Intelligent'}
+                        {m.role === 'user' ? 'You' : 'My Campus-Intelligent'}
                       </span>
                       <div className="markdown-content">
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>
@@ -1162,106 +1257,628 @@ function App() {
                 </button>
               </form>
             </div>
+          
+          
+
           ) : page === 'Overview' ? (
             <>
-              <div className="stats">
-                {dashboardCards.map(([label, value]: any, i: number) => (
-                  <div className="stat card" key={label}>
-                    <div className="stat-icon">
-                      {[<Users />, <BookOpen />, <CalendarDays />, <Activity />][i % 4]}
-                    </div>
-                    <span className="stat-label">{label}</span>
-                    <b>{value}</b>
-                  </div>
-                ))}
-              </div>
-
-              
-
-              <div className="card quick-actions-card">
-                <div className="card-head">
-                  <div>
-                    <h2>Quick actions</h2>
-                    <p className="muted">
-                      Frequently used tools for your university workspace.
-                    </p>
-                  </div>
+              <div className="intelligence-header">
+                <div>
+                  <p className="eyebrow">CAMPUS MIND INTELLIGENCE</p>
+                  <h2>University Intelligence Dashboard</h2>
+                  <p className="muted">
+                    Data-driven academic analytics for your authorized university scope.
+                  </p>
                 </div>
 
-                <div className="quick-actions">
-                  {quickActions.map((item) => (
-                    <button
-                      key={item.page}
-                      className="quick-action"
-                      onClick={() => selectPage(item.page)}
-                    >
-                      <span>{item.label}</span>
-                      <ChevronRight size={15} />
-                      </button>
-                  ))}
+                <div className="intelligence-live">
+                  <span className="status-dot" />
+                  Live analytics
                 </div>
               </div>
 
-            
+              {busy && !intelligence ? (
+                <div className="card data-card">
+                  <div className="empty">
+                    Loading Campus Mind Intelligence...
+                  </div>
+                </div>
+              ) : (
+                <>
+                  {/* KPI CARDS */}
+
+                  <div className="stats intelligence-stats">
+
+                    <div className="stat card intelligence-stat">
+                      <div className="stat-icon">
+                        <Users />
+                      </div>
+
+                      <span className="stat-label">
+                        {user.role === 'student'
+                          ? 'My profile'
+                          : 'Students'}
+                      </span>
+
+                      <b>{intelligenceStudents}</b>
+
+                      <small>
+                        {user.role === 'student'
+                          ? 'Personal analytics'
+                          : `${intelligenceSubjects} assigned subjects`}
+                      </small>
+                    </div>
 
 
-              {dashboard.attendance_warning && (
-                <div className="error attendance-alert">
-                  Your attendance is below the configured {dashboard.attendance_alert_threshold}%
-                  alert threshold. Contact your Course Admin if a record needs review.
-                </div>
-              )}
-              <div className="overview-grid">
-                <div className="card data-card">
-                  <div className="card-head">
-                    <div>
-                      <h2>Announcements</h2>
-                      <p className="muted">Latest updates for your access scope.</p>
+                    <div className="stat card intelligence-stat">
+                      <div className="stat-icon">
+                        <ClipboardCheck />
+                      </div>
+
+                      <span className="stat-label">
+                        Attendance
+                      </span>
+
+                      <b>{intelligenceAttendance.toFixed(1)}%</b>
+
+                      <small>
+                        {intelligenceAtRisk > 0
+                          ? `${intelligenceAtRisk} below 75%`
+                          : 'No attendance risk detected'}
+                      </small>
                     </div>
-                    <button className="text-button" onClick={() => setPage('Announcements')}>
-                      View all <ChevronRight size={14} />
-                    </button>
-                  </div>
-                  {dashboard.announcements?.length ? (
-                    dashboard.announcements.map((a: any) => (
-                      <article className="announcement" key={a.id}>
-                        <b>{a.title}</b>
-                        <p>{a.body}</p>
-                      </article>
-                    ))
-                  ) : (
-                    <div className="empty">No announcements have been published.</div>
-                  )}
-                </div>
-                <div className="card data-card">
-                  <div className="card-head">
-                    <div>
-                      <h2>
-                        {user.role === 'student' ? 'Upcoming campus events' : 'Academic workspace'}
-                      </h2>
-                      <p className="muted">Your next steps and scheduled activities.</p>
+
+
+                    <div className="stat card intelligence-stat">
+                      <div className="stat-icon">
+                        <ChartNoAxesCombined />
+                      </div>
+
+                      <span className="stat-label">
+                        Academic performance
+                      </span>
+
+                      <b>{intelligencePerformance.toFixed(1)}%</b>
+
+                      <small>
+                        Published grade records
+                      </small>
                     </div>
+
+
+                    <div className="stat card intelligence-stat">
+                      <div className="stat-icon">
+                        <Activity />
+                      </div>
+
+                      <span className="stat-label">
+                        Students at risk
+                      </span>
+
+                      <b>{intelligenceAtRisk}</b>
+
+                      <small>
+                        Attendance below 75%
+                      </small>
+                    </div>
+
                   </div>
-                  {dashboard.events?.length ? (
-                    dashboard.events.map((e: any) => (
-                      <div className="event-row" key={e.id}>
-                        <CalendarDays size={17} />
+
+
+                  {/* SUBJECT PERFORMANCE + ATTENDANCE */}
+
+                  <div className="overview-grid intelligence-grid">
+
+                    <div className="card data-card">
+                      <div className="card-head">
                         <div>
-                          <b>{e.title}</b>
-                          <small>{pretty(e.starts_at)}</small>
+                          <h2>Performance by Subject</h2>
+                          <p className="muted">
+                            Average published academic performance.
+                          </p>
                         </div>
                       </div>
-                    ))
-                  ) : (
-                    <div className="empty">
-                      {user.role === 'student'
-                        ? 'No upcoming events.'
-                        : 'Use the workspace menu to manage university workflows.'}
+
+                      {intelligencePerformanceSubjects.length ? (
+                        <div className="intelligence-bars">
+                          {intelligencePerformanceSubjects.map((subject: any) => (
+                            <IntelligenceBar
+                              key={subject.subject}
+                              label={`${subject.subject} — ${subject.name}`}
+                              value={subject.average}
+                            />
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="empty">
+                          No published performance data available.
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-              </div>
+
+
+                    <div className="card data-card">
+                      <div className="card-head">
+                        <div>
+                          <h2>Attendance by Subject</h2>
+                          <p className="muted">
+                            Attendance calculated from recorded classes.
+                          </p>
+                        </div>
+                      </div>
+
+                      {intelligenceAttendanceSubjects.length ? (
+                        <div className="intelligence-bars">
+                          {intelligenceAttendanceSubjects.map((subject: any) => (
+                            <IntelligenceBar
+                              key={subject.subject}
+                              label={`${subject.subject} — ${subject.name}`}
+                              value={subject.percentage}
+                            />
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="empty">
+                          No attendance data available.
+                        </div>
+                      )}
+                    </div>
+
+                  </div>
+
+
+                  {/* ASSIGNMENT ANALYTICS */}
+
+                  <div className="overview-grid">
+
+                    <div className="card data-card">
+                      <div className="card-head">
+                        <div>
+                          <h2>Assignment Analytics</h2>
+                          <p className="muted">
+                            Assignment activity within your authorized scope.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="assignment-intelligence">
+
+                        <div>
+                          <span>Total assignments</span>
+                          <b>{intelligenceAssignments}</b>
+                        </div>
+
+                        <div>
+                          <span>Submission rate</span>
+                          <b>{intelligenceSubmissionRate.toFixed(1)}%</b>
+                        </div>
+
+                      </div>
+
+                      <div className="intelligence-bar-row">
+                        <div className="intelligence-bar-label">
+                          <span>Submission completion</span>
+                          <b>{intelligenceSubmissionRate.toFixed(1)}%</b>
+                        </div>
+
+                        <div className="intelligence-bar-track">
+                          <div
+                            className="intelligence-bar-fill"
+                            style={{
+                              width: `${Math.min(
+                                100,
+                                Math.max(0, intelligenceSubmissionRate)
+                              )}%`,
+                            }}
+                          />
+                        </div>
+                      </div>
+
+                    </div>
+
+
+                    {/* RISK */}
+
+                    <div className="card data-card">
+                      <div className="card-head">
+                        <div>
+                          <h2>Risk Overview</h2>
+                          <p className="muted">
+                            Students requiring attendance attention.
+                          </p>
+                        </div>
+                      </div>
+
+                      {intelligenceAtRisk > 0 ? (
+                        <div className="risk-highlight">
+                          <div className="risk-number">
+                            {intelligenceAtRisk}
+                          </div>
+
+                          <div>
+                            <b>Students below 75% attendance</b>
+                            <p>
+                              These students may require academic follow-up
+                              or attendance review.
+                            </p>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="empty">
+                          No students are currently below the 75% attendance
+                          threshold.
+                        </div>
+                      )}
+
+                    </div>
+
+                  </div>
+                  
+
+
+                  
+                  <section className="card intelligence-risk-section">
+                    <div className="section-heading">
+                      <div>
+                        <h3>Student Risk Analysis</h3>
+                        <p>
+                          Students identified using attendance, academic performance,
+                          and assignment activity.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="risk-summary-grid">
+                      <div className="risk-summary-card risk-high">
+                        <span>High Risk</span>
+                        <strong>{highRiskCount}</strong>
+                        <small>Multiple academic risk indicators</small>
+                      </div>
+
+                      <div className="risk-summary-card risk-medium">
+                        <span>Medium Risk</span>
+                        <strong>{mediumRiskCount}</strong>
+                        <small>Requires monitoring</small>
+                      </div>
+
+                      <div className="risk-summary-card risk-low">
+                        <span>Low Risk</span>
+                        <strong>{lowRiskCount}</strong>
+                        <small>No major risk indicators</small>
+                      </div>
+                    </div>
+
+                    {highRiskStudents.length > 0 ? (
+                      <div className="risk-student-list">
+
+                        <div className="risk-list-header">
+                          <div>
+                            <h4>High-Risk Students</h4>
+                            <small>
+                              Students requiring immediate academic attention
+                            </small>
+                          </div>
+
+                          <span>
+                            {highRiskStudents.length} student
+                            {highRiskStudents.length !== 1 ? 's' : ''}
+                          </span>
+                        </div>
+
+                        {highRiskStudents.slice(0, 5).map((student: any) => (
+                          <div
+                            key={student.student_id}
+                            className="risk-student-row"
+                          >
+                            <div className="risk-student-main">
+                              <strong>{student.name}</strong>
+
+                              <small>{student.student_number}</small>
+
+                              <div className="risk-factor-list">
+                                {student.risk_factors?.length ? (
+                                  student.risk_factors.map(
+                                    (factor: string) => (
+                                      <span key={factor}>
+                                        {factor}
+                                      </span>
+                                    )
+                                  )
+                                ) : (
+                                  <span>No specific risk factor recorded</span>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="risk-metrics">
+                              <div>
+                                <small>Attendance</small>
+                                <strong>
+                                  {Number(student.attendance || 0).toFixed(1)}%
+                                </strong>
+                              </div>
+
+                              <div>
+                                <small>Performance</small>
+                                <strong>
+                                  {Number(student.performance || 0).toFixed(1)}%
+                                </strong>
+                              </div>
+
+                              <div>
+                                <small>Assignments</small>
+                                <strong>
+                                  {Number(
+                                    student.assignment_completion || 0
+                                  ).toFixed(1)}%
+                                </strong>
+                              </div>
+
+                              <div>
+                                <small>Risk score</small>
+                                <strong>
+                                  {student.risk_score}
+                                </strong>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : mediumRiskStudents.length > 0 ? (
+                      <div className="risk-student-list">
+
+                        <div className="risk-list-header">
+                          <div>
+                            <h4>Students Requiring Monitoring</h4>
+                            <small>
+                              No high-risk students were identified, so
+                              medium-risk students are shown for monitoring.
+                            </small>
+                          </div>
+
+                          <span>
+                            {mediumRiskStudents.length} student
+                            {mediumRiskStudents.length !== 1 ? 's' : ''}
+                          </span>
+                        </div>
+
+                        {mediumRiskStudents.slice(0, 5).map((student: any) => (
+                          <div
+                            key={student.student_id}
+                            className="risk-student-row"
+                          >
+                            <div className="risk-student-main">
+                              <strong>{student.name}</strong>
+
+                              <small>{student.student_number}</small>
+
+                              <div className="risk-factor-list">
+                                {student.risk_factors?.length ? (
+                                  student.risk_factors.map(
+                                    (factor: string) => (
+                                      <span key={factor}>
+                                        {factor}
+                                      </span>
+                                    )
+                                  )
+                                ) : (
+                                  <span>Requires academic monitoring</span>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="risk-metrics">
+                              <div>
+                                <small>Attendance</small>
+                                <strong>
+                                  {Number(student.attendance || 0).toFixed(1)}%
+                                </strong>
+                              </div>
+
+                              <div>
+                                <small>Performance</small>
+                                <strong>
+                                  {Number(student.performance || 0).toFixed(1)}%
+                                </strong>
+                              </div>
+
+                              <div>
+                                <small>Assignments</small>
+                                <strong>
+                                  {Number(
+                                    student.assignment_completion || 0
+                                  ).toFixed(1)}%
+                                </strong>
+                              </div>
+
+                              <div>
+                                <small>Risk score</small>
+                                <strong>
+                                  {student.risk_score}
+                                </strong>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="risk-empty-state">
+                        No students currently require academic-risk monitoring
+                        in the authorized data.
+                      </div>
+                    )}
+                  </section>
+
+
+
+
+                  {/* AI INSIGHTS */}
+
+                  <div className="card data-card intelligence-insights">
+
+                    <div className="card-head">
+                      <div>
+                        <h2>AI Insights</h2>
+                        <p className="muted">
+                          Observations generated from verified university data.
+                        </p>
+                      </div>
+
+                      <MessageCircle size={20} />
+                    </div>
+
+                    {intelligenceInsights.length ? (
+                      <div className="insight-list">
+                        {intelligenceInsights.map(
+                          (insight: string, index: number) => (
+                            <div
+                              className="insight-item"
+                              key={`${index}-${insight}`}
+                            >
+                              <div className="insight-number">
+                                {index + 1}
+                              </div>
+
+                              <div>
+                                <b>Campus Mind Intelligence</b>
+                                <p>{insight}</p>
+                              </div>
+                            </div>
+                          )
+                        )}
+                      </div>
+                    ) : (
+                      <div className="empty">
+                        No new intelligence insights are available.
+                      </div>
+                    )}
+
+                  </div>
+
+
+                  {/* QUICK ACTIONS */}
+
+                  <div className="card quick-actions-card">
+
+                    <div className="card-head">
+                      <div>
+                        <h2>Quick actions</h2>
+                        <p className="muted">
+                          Frequently used university workflows.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="quick-actions">
+
+                      {quickActions.map((item) => (
+                        <button
+                          key={item.page}
+                          className="quick-action"
+                          onClick={() => selectPage(item.page)}
+                        >
+                          <span>{item.label}</span>
+                          <ChevronRight size={15} />
+                        </button>
+                      ))}
+
+                    </div>
+
+                  </div>
+
+
+                  {/* EXISTING ANNOUNCEMENTS / WORKSPACE */}
+
+                  <div className="overview-grid">
+
+                    <div className="card data-card">
+
+                      <div className="card-head">
+                        <div>
+                          <h2>Announcements</h2>
+                          <p className="muted">
+                            Latest updates for your access scope.
+                          </p>
+                        </div>
+
+                        <button
+                          className="text-button"
+                          onClick={() => setPage('Announcements')}
+                        >
+                          View all <ChevronRight size={14} />
+                        </button>
+                      </div>
+
+                      {dashboard.announcements?.length ? (
+                        dashboard.announcements.map((a: any) => (
+                          <article
+                            className="announcement"
+                            key={a.id}
+                          >
+                            <b>{a.title}</b>
+                            <p>{a.body}</p>
+                          </article>
+                        ))
+                      ) : (
+                        <div className="empty">
+                          No announcements have been published.
+                        </div>
+                      )}
+
+                    </div>
+
+
+                    <div className="card data-card">
+
+                      <div className="card-head">
+
+                        <div>
+                          <h2>
+                            {user.role === 'student'
+                              ? 'Upcoming campus events'
+                              : 'Academic workspace'}
+                          </h2>
+
+                          <p className="muted">
+                            Your next steps and scheduled activities.
+                          </p>
+                        </div>
+
+                      </div>
+
+                      {dashboard.events?.length ? (
+                        dashboard.events.map((e: any) => (
+                          <div
+                            className="event-row"
+                            key={e.id}
+                          >
+                            <CalendarDays size={17} />
+
+                            <div>
+                              <b>{e.title}</b>
+                              <small>{pretty(e.starts_at)}</small>
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="empty">
+                          {user.role === 'student'
+                            ? 'No upcoming events.'
+                            : 'Use the workspace menu to manage university workflows.'}
+                        </div>
+                      )}
+
+                    </div>
+
+                  </div>
+                </>
+              )}
             </>
+
+          
+
+
+
           ) : page === 'Profile' ? (
             <div className="card data-card profile-card">
               <div className="card-head">

@@ -27,7 +27,22 @@ class Settings(BaseSettings):
         if isinstance(value, str):
             return [part.strip() for part in value.split(",") if part.strip()]
         return value
+    
+    
+    @field_validator("app_env")
+    @classmethod
+    def validate_app_env(cls, value: str) -> str:
+        value = value.strip().lower()
 
+        if value not in {"development", "test", "production"}:
+            raise ValueError(
+                "APP_ENV must be development, test, or production"
+            )
+
+        return value
+    
+    
+    
     @model_validator(mode="after")
     def validate_production_settings(self):
         if self.app_env.lower() != "production":

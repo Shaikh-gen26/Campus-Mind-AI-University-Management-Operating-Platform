@@ -16,6 +16,9 @@ from datetime import datetime
 import json
 import logging
 import re
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
 from urllib.error import HTTPError, URLError
 from urllib.request import Request as URLRequest, urlopen
 from fastapi import Depends, FastAPI, HTTPException, Query, Request, Response
@@ -50,6 +53,20 @@ app = FastAPI(
     redoc_url=None if is_production else "/redoc",
     openapi_url=None if is_production else "/openapi.json",
 )
+
+
+limiter = Limiter(
+    key_func=get_remote_address,
+    enabled=settings.app_env != "test",
+)
+
+app.state.limiter = limiter
+app.add_exception_handler(
+    RateLimitExceeded,
+    _rate_limit_exceeded_handler,
+)
+
+
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.allowed_hosts)
 if settings.cors_origins:
     app.add_middleware(
@@ -185,7 +202,13 @@ def authenticate_user(data: schemas.Login, db: Session) -> models.User:
 
 
 @app.post("/api/auth/login")
-def login(data: schemas.Login, response: Response, db: Session = Depends(get_db)):
+@limiter.limit("5/minute")
+def login(
+    request: Request,
+    data: schemas.Login,
+    response: Response,
+    db: Session = Depends(get_db),
+):
     user = authenticate_user(data, db)
     response.set_cookie(
         key=SESSION_COOKIE,
@@ -200,7 +223,12 @@ def login(data: schemas.Login, response: Response, db: Session = Depends(get_db)
 
 
 @app.post("/api/auth/token")
-def issue_api_token(data: schemas.Login, db: Session = Depends(get_db)):
+@limiter.limit("5/minute")
+def issue_api_token(
+    request: Request,
+    data: schemas.Login,
+    db: Session = Depends(get_db),
+):
     user = authenticate_user(data, db)
     return {
         "access_token": create_token(user),
@@ -872,10 +900,7 @@ def analytics(
             models.Assignment.subject_id.in_(assigned_subject_ids)
         )
 
-        submission_q = submission_q.join(
-            models.Assignment,
-            models.Submission.assignment_id == models.Assignment.id,
-        ).where(
+        submission_q = submission_q.where(
             models.Assignment.subject_id.in_(assigned_subject_ids)
         )
 
@@ -2599,6 +2624,7 @@ def ask(
             course = db.get(models.Course, student.course_id)
             personal = f"Student's course: {course.name if course else 'unknown'}. Attendance: {present}/{total} records present ({round(100*present/total) if total else 0}%). Assignments available: {len(assignments_rows)}. Grades recorded: {len(grades_rows)}."
             context += "\n\nAuthorized personal academic context:\n" + personal
+            timetable_rows = []
             if question_terms & {"attendance", "present", "absent"}:
                 by_subject = db.execute(
                     select(

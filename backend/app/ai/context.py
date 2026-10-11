@@ -188,8 +188,14 @@ def build_query_context(
     # Resolve academic-performance follow-ups using conversation history.
     normalized_question = question.strip().lower()
 
+    
+    
     is_performance_followup = (
-        intent == "general_campus_question"
+        intent in {
+            "general_campus_question",
+            "student_performance",
+            "subject_performance",
+        }
         and bool(
             re.search(
                 r"\b(?:what about|how about|and)\b"
@@ -198,6 +204,8 @@ def build_query_context(
             )
         )
     )
+    
+    
 
     if is_performance_followup and history and subject_ids:
         previous_answer = next(

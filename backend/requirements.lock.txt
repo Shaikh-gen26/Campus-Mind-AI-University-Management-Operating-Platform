@@ -12,10 +12,15 @@ annotated-types==0.8.0
     # via pydantic
 anyio==4.15.1
     # via
+    #   httpx
     #   starlette
     #   watchfiles
 bcrypt==4.3.0
     # via -r requirements.txt
+certifi==2026.7.22
+    # via
+    #   httpcore
+    #   httpx
 click==8.5.0
     # via uvicorn
 deprecated==3.0.0
@@ -23,11 +28,19 @@ deprecated==3.0.0
 fastapi==0.142.2
     # via -r requirements.txt
 h11==0.16.0
-    # via uvicorn
+    # via
+    #   httpcore
+    #   uvicorn
+httpcore==1.0.9
+    # via httpx
 httptools==0.8.0
     # via uvicorn
+httpx==0.28.1
+    # via -r requirements.txt
 idna==3.20
-    # via anyio
+    # via
+    #   anyio
+    #   httpx
 limits==5.8.0
     # via slowapi
 mako==1.4.3

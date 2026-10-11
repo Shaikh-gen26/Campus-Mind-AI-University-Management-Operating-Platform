@@ -194,7 +194,7 @@ def format_query_answer(query_context: dict) -> str | None:
     # ---------------------------------------------------------
     # Student academic performance
     # ---------------------------------------------------------
-    if intent == "student_performance":
+    if intent in {"student_performance", "subject_performance"}:
         overall = percentage(data.get("overall_percentage"))
         subjects = data.get("subjects") or []
         entities = query_context.get("entities") or {}

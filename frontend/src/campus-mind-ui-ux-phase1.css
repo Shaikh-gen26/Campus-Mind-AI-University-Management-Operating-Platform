@@ -1,8 +1,8 @@
 /*
- * Campus Mind AI — UI/UX Phase 2 replacement stylesheet
- * Replace the previous campus-mind-ui-ux-phase1.css with this file.
+ * Campus Mind AI — UI/UX Upgrade (CSS-only, project-specific)
+ * Replace the previous UI-UX override stylesheet with this file.
  * Keep the application's original style.css loaded BEFORE this file.
- * CSS-only visual refresh: no application logic or API behaviour is changed.
+ * Built around the existing .shell, .sidebar, .nav-item, dashboard, FAQ, forms, table and AI-chat classes. No app logic or API behaviour is changed.
  */
 
 :root {
@@ -1858,6 +1858,620 @@ textarea:focus-visible {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* ========================================================================
+   CAMPUS MIND AI — UX UPGRADE PASS
+   These refinements are intentionally CSS-only and reuse current markup.
+   ======================================================================== */
+
+:root {
+  --cm-primary: #4f46e5;
+  --cm-primary-dark: #3730a3;
+  --cm-primary-soft: #eef2ff;
+  --cm-primary-glow: rgba(79, 70, 229, 0.18);
+  --cm-cyan: #0faaa5;
+  --cm-cyan-soft: #e7fbf8;
+  --cm-amber: #f59e0b;
+  --cm-text: #17233d;
+  --cm-text-soft: #52617b;
+  --cm-muted: #71809a;
+  --cm-border: #e2e8f2;
+  --cm-page: #f4f7fc;
+  --cm-sidebar: #101a31;
+  --cm-sidebar-soft: #1a294b;
+  --cm-focus: 0 0 0 4px rgba(79, 70, 229, 0.2);
+}
+
+body {
+  background:
+    radial-gradient(ellipse at 88% -10%, rgba(79, 70, 229, 0.095), transparent 37%),
+    radial-gradient(ellipse at 5% 30%, rgba(15, 170, 165, 0.055), transparent 29%),
+    var(--cm-page);
+}
+
+/* Predictable sizing prevents long tables and AI answers from pushing the page wide. */
+.shell,
+.main,
+.content,
+.card,
+.data-card,
+.ai-card,
+.overview-grid > *,
+.stats > * {
+  min-width: 0;
+}
+
+.main {
+  width: auto;
+}
+
+.content {
+  padding-top: clamp(22px, 3vw, 38px);
+}
+
+.welcome h1 {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  line-height: 1.18;
+}
+
+/* More legible navigation and stronger selected state. */
+.sidebar {
+  isolation: isolate;
+}
+
+.nav-item {
+  min-height: 46px;
+  border-radius: 13px;
+  letter-spacing: -0.01em;
+}
+
+.nav-item.selected {
+  background: linear-gradient(105deg, rgba(93, 102, 238, 0.30), rgba(15, 170, 165, 0.11));
+  box-shadow: inset 3px 0 0 #79e2db, inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.nav-item:focus-visible {
+  outline: 3px solid rgba(151, 184, 255, 0.82);
+  outline-offset: 2px;
+}
+
+/* Dashboard cards: consistent rhythm, clearer grouping, restrained lift. */
+.card {
+  overflow-wrap: anywhere;
+  box-shadow: 0 4px 15px rgba(26, 43, 79, 0.045), 0 1px 2px rgba(26, 43, 79, 0.025);
+}
+
+.stat.card,
+.data-card,
+.quick-actions-card,
+.faq-page {
+  border-radius: 18px;
+}
+
+.stat.card:hover,
+.data-card.card:hover,
+.quick-actions-card:hover {
+  transform: translateY(-2px);
+}
+
+.stat-label {
+  line-height: 1.45;
+}
+
+.stat b {
+  overflow-wrap: anywhere;
+}
+
+.card-head {
+  align-items: center;
+}
+
+.quick-action {
+  min-height: 52px;
+  line-height: 1.45;
+}
+
+/* Forms have strong focus feedback, larger hit areas and readable placeholders. */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+
+.form-grid label {
+  display: block;
+  min-width: 0;
+  line-height: 1.5;
+}
+
+.form-grid label.wide {
+  grid-column: 1 / -1;
+}
+
+.form-grid input,
+.form-grid select,
+.form-grid textarea,
+.login-card input,
+.chat-history select {
+  min-height: 46px;
+  line-height: 1.45;
+}
+
+.form-grid input:focus-visible,
+.form-grid select:focus-visible,
+.form-grid textarea:focus-visible,
+.login-card input:focus-visible,
+.chat-history select:focus-visible,
+.search:focus-within,
+.ask-form:focus-within {
+  outline: none;
+  border-color: #9098f7;
+  box-shadow: var(--cm-focus);
+}
+
+/* Tables remain readable: their wrapper scrolls instead of breaking the layout. */
+.table-wrap {
+  max-width: 100%;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  font-variant-numeric: tabular-nums;
+}
+
+th {
+  z-index: 1;
+}
+
+td {
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* Profile, error and notice components have clearer hierarchy. */
+.profile-card dl {
+  background: #ffffff;
+}
+
+.notice,
+.error {
+  align-items: flex-start;
+  border-radius: 13px;
+  line-height: 1.65;
+}
+
+/* AI assistant card is the focal surface without changing its workflow. */
+.ai-card {
+  position: relative;
+  overflow: hidden;
+  border-color: #dfe5f5;
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(79, 70, 229, 0.055), transparent 34%),
+    radial-gradient(ellipse at 100% 0%, rgba(15, 170, 165, 0.05), transparent 28%),
+    linear-gradient(180deg, #ffffff 0%, #fcfdff 100%);
+}
+
+.ai-card > .ai-icon,
+.chat-empty .ai-icon {
+  isolation: isolate;
+  overflow: visible;
+  border: 1px solid rgba(255,255,255,0.98);
+  background:
+    radial-gradient(circle at 50% 12%, #626beb 0 2px, transparent 2.8px),
+    linear-gradient(#626beb, #626beb) 50% 14% / 2px 7px no-repeat,
+    radial-gradient(circle at 24% 54%, #a7c4ff 0 3.5px, transparent 4px),
+    radial-gradient(circle at 76% 54%, #a7c4ff 0 3.5px, transparent 4px),
+    radial-gradient(circle at 22% 18%, rgba(255,255,255,0.95), transparent 36%),
+    linear-gradient(145deg, #dffbf8 0%, #dfe7ff 50%, #ece8ff 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(100, 128, 219, 0.10),
+    0 10px 25px rgba(70, 92, 180, 0.14),
+    0 0 0 5px rgba(79, 70, 229, 0.045);
+}
+
+/* Human-inspired synthetic assistant face: head, eyes, cheeks and mouth. */
+.ai-icon::before {
+  top: 26%;
+  left: 27%;
+  width: 46%;
+  height: 53%;
+  border: 1px solid rgba(255,255,255,0.95);
+  border-radius: 44% 44% 39% 39%;
+  background:
+    radial-gradient(ellipse at 27% 65%, rgba(255, 143, 160, 0.28) 0 9%, transparent 12%),
+    radial-gradient(ellipse at 73% 65%, rgba(255, 143, 160, 0.28) 0 9%, transparent 12%),
+    linear-gradient(155deg, #f7ffff 0%, #c3dcff 54%, #a7b7f7 100%);
+  box-shadow: 0 3px 8px rgba(54, 79, 160, 0.18), inset 0 -3px 5px rgba(74, 99, 194, 0.10);
+}
+
+.ai-icon::after {
+  top: 43%;
+  left: 35%;
+  width: 30%;
+  height: 19%;
+  background-image:
+    radial-gradient(ellipse, #24365e 0 2px, transparent 2.5px),
+    radial-gradient(ellipse, #24365e 0 2px, transparent 2.5px),
+    linear-gradient(#4c70be, #4c70be);
+  background-repeat: no-repeat;
+  background-size: 32% 36%, 32% 36%, 45% 2px;
+  background-position: left 4px top, right 4px top, center bottom 1px;
+  border-radius: 8px;
+}
+
+.ai-card > .ai-icon {
+  animation: cm-avatar-float 5s ease-in-out infinite;
+}
+
+.chat-title h2 {
+  line-height: 1.3;
+}
+
+.chat-history select {
+  background-color: #ffffff;
+}
+
+.chat-messages {
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+.chat-message {
+  line-height: 1.72;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.from-user {
+  border-color: #d9e3ff;
+  background: linear-gradient(135deg, #edf2ff 0%, #f4f7ff 100%);
+}
+
+.from-ai {
+  border-color: #e4e9f5;
+  background: rgba(255,255,255,0.97);
+}
+
+.message-label {
+  display: block;
+  margin-bottom: 5px;
+  color: #4856b8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.markdown-content {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: #33425c;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3 {
+  margin: 14px 0 7px;
+  color: #1d2c4a;
+  line-height: 1.35;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  padding-left: 1.35rem;
+}
+
+.markdown-content li + li {
+  margin-top: 4px;
+}
+
+.markdown-content pre {
+  max-width: 100%;
+  overflow: auto;
+  padding: 12px;
+  border: 1px solid #e2e8f3;
+  border-radius: 10px;
+  background: #f7f9fd;
+}
+
+.markdown-content a {
+  color: #484bd1;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  color: #6d7c96;
+  font-size: 10px;
+}
+
+.sources span {
+  display: inline-block;
+  max-width: 100%;
+  padding: 4px 8px;
+  border: 1px solid #dfe8f4;
+  border-radius: 999px;
+  background: #f8fbff;
+  color: #51627f;
+  overflow-wrap: anywhere;
+}
+
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 14px;
+}
+
+.suggestions button {
+  min-height: 40px;
+  padding: 9px 13px;
+  border: 1px solid #dfe5f4;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #4f5e7d;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.suggestions button:hover,
+.suggestions button:focus-visible {
+  border-color: #b9c2ff;
+  background: #f3f5ff;
+  color: var(--cm-primary-dark);
+}
+
+.ask-form {
+  position: relative;
+  z-index: 2;
+}
+
+.ask-form input {
+  min-width: 0;
+  font-size: 13px;
+}
+
+.ask-form .primary {
+  min-height: 46px;
+}
+
+.typing {
+  color: var(--cm-muted);
+}
+
+@keyframes cm-avatar-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+/* Tablet: compact but still labelled controls. */
+@media (max-width: 1050px) {
+  .content { padding-left: 24px; padding-right: 24px; }
+  .topbar { padding-left: 24px; padding-right: 24px; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Phone: replace the narrow icon rail with a touch-friendly, horizontally
+   scrollable navigation row. This uses the existing navigation markup. */
+@media (max-width: 680px) {
+  .sidebar {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    padding: 12px 12px 9px;
+    overflow: visible;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 8px 24px rgba(17,26,50,0.10);
+  }
+
+  .brand {
+    justify-content: flex-start;
+    padding: 0 3px 10px;
+  }
+
+  .brand > div:not(.brand-mark) {
+    display: block;
+  }
+
+  .brand b { font-size: 14px; }
+  .brand small { font-size: 10px; }
+  .brand-mark { width: 40px; height: 40px; flex-basis: 40px; }
+
+  .nav-label { display: none; }
+
+  .sidebar nav {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 6px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 2px 1px 7px;
+    scrollbar-width: thin;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav-item {
+    position: relative;
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    width: auto;
+    min-width: max-content;
+    min-height: 44px;
+    margin: 0;
+    padding: 10px 12px;
+    border-radius: 11px;
+    font-size: 11px;
+  }
+
+  .nav-item > span:not(.nav-count) {
+    position: static;
+    display: inline-flex;
+    width: auto;
+    height: auto;
+    clip: auto;
+    clip-path: none;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+  }
+
+  .nav-item > svg { width: 16px; height: 16px; }
+
+  .nav-item .nav-count {
+    position: static;
+    min-width: 18px;
+    margin-left: 2px;
+    padding: 2px 5px;
+    font-size: 9px;
+  }
+
+  .side-bottom {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(205,218,255,0.11);
+  }
+
+  .profile { justify-content: flex-end; gap: 8px; }
+  .profile-info {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    clip-path: none;
+    margin: 0;
+    padding: 0;
+    white-space: normal;
+  }
+  .profile-info b { max-width: 180px; color: #f4f6ff; font-size: 11px; }
+  .profile-info small { color: #aab7d6; font-size: 9px; }
+
+  .main { width: 100%; margin-left: 0; }
+  .topbar {
+    top: 0;
+    min-height: 58px;
+    gap: 8px;
+    padding: 9px 13px;
+  }
+  .crumb { min-width: 0; font-size: 11px; }
+  .top-actions { max-width: 58%; gap: 7px; padding: 5px 7px; font-size: 10px; }
+  .content { padding: 20px 13px 30px; }
+  .welcome { gap: 12px; margin-bottom: 18px; }
+  .welcome h1 { font-size: clamp(22px, 6vw, 28px); }
+  .welcome p, .welcome .muted { font-size: 12px; }
+  .welcome-actions { width: 100%; }
+  .welcome-actions .search { flex: 1 1 100%; min-width: 0; }
+  .welcome-actions .primary { min-height: 44px; }
+
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .stat { min-height: 115px; padding: 14px; }
+  .stat-icon { width: 35px; height: 35px; margin-bottom: 10px; }
+  .stat-label { font-size: 9px; letter-spacing: 0.045em; }
+  .stat b { font-size: 20px; }
+  .overview-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; margin-top: 14px; }
+  .data-card, .quick-actions-card { padding: 15px; }
+  .quick-actions { grid-template-columns: minmax(0, 1fr); }
+  .quick-action { min-height: 48px; }
+
+  .table-wrap { margin-top: 12px; border-radius: 11px; }
+  table { min-width: 560px; font-size: 11px; }
+  th { padding: 11px 12px; font-size: 9px; }
+  td { padding: 11px 12px; }
+
+  .ai-card {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 0 10px;
+    padding: 14px;
+    border-radius: 18px;
+  }
+  .ai-card > .ai-icon { width: 42px; height: 42px; border-radius: 14px; }
+  .chat-title { flex-direction: column; align-items: stretch; gap: 10px; min-height: 42px; }
+  .chat-title > div:first-child { width: 100%; }
+  .chat-title h2 { font-size: 17px; }
+  .chat-title p, .chat-title .muted { font-size: 11px; }
+  .chat-tools { width: 100%; justify-content: flex-start; }
+  .chat-tools .secondary { flex: 1 1 auto; min-height: 42px; }
+  .chat-history { margin-top: 15px; padding-top: 12px; }
+  .chat-history label { align-items: stretch; flex-direction: column; gap: 6px; }
+  .chat-history select { width: 100%; max-width: 100%; min-width: 0; }
+  .chat-messages { height: clamp(280px, 46dvh, 520px); min-height: 260px; padding: 10px; }
+  .chat-message { max-width: 100%; padding: 11px 12px; font-size: 12px; }
+  .chat-empty .ai-icon { width: 66px; height: 66px; }
+  .chat-empty b { font-size: 17px; }
+  .chat-empty p { font-size: 12px; }
+  .suggestions { display: flex; flex-wrap: nowrap; overflow-x: auto; padding: 12px 1px 5px; margin-inline: -1px; }
+  .suggestions button { flex: 0 0 auto; max-width: 88%; min-height: 42px; }
+  .ask-form { position: static; gap: 5px; margin-top: 10px; padding: 5px; }
+  .ask-form input { height: 44px; padding: 0 9px; font-size: 12px; }
+  .ask-form .primary { min-width: 72px; min-height: 44px; padding: 9px 12px; }
+
+  .profile-card dl { grid-template-columns: minmax(0, 1fr); }
+  .modal-backdrop { padding: 10px; }
+  .modal { max-height: 92dvh; border-radius: 16px; }
+  .form-grid { grid-template-columns: minmax(0, 1fr); }
+  .form-grid label.wide { grid-column: auto; }
+  .modal-actions > button { min-height: 44px; }
+  .faq-categories { gap: 7px; }
+  .faq-categories button { min-height: 42px; }
+  .faq-item summary { min-height: 48px; }
+}
+
+@media (max-width: 420px) {
+  .sidebar { padding: 10px 9px 8px; }
+  .brand { gap: 9px; }
+  .brand-mark { width: 37px; height: 37px; flex-basis: 37px; }
+  .content { padding: 17px 10px 26px; }
+  .topbar { padding-inline: 10px; }
+  .top-actions { max-width: 52%; }
+  .stats { grid-template-columns: minmax(0, 1fr); }
+  .stat { min-height: 100px; }
+  .stat-icon { float: right; margin-bottom: 0; }
+  .stat-label { padding-top: 5px; }
+  .chat-tools { flex-direction: row; align-items: stretch; }
+  .chat-tools .secondary { min-width: 0; padding-inline: 8px; font-size: 10px; }
+  .ai-card { padding: 11px; }
+  .chat-message { font-size: 11.5px; }
+  .login-card { padding: 25px 20px; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-item:hover,
+  .quick-action:hover,
+  .primary:hover:not(:disabled),
+  .secondary:hover:not(:disabled),
+  .suggestions button:hover {
+    transform: translateY(-1px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-card > .ai-icon { animation: none !important; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }

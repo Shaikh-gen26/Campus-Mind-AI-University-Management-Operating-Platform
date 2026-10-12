@@ -3382,3 +3382,59 @@ summary:focus-visible {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* Campus Mind AI — Sidebar Typography */
+
+.nav-item {
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.01em;
+    color: #52627a;
+}
+
+.nav-item.selected {
+    font-weight: 700;
+    color: var(--cm-primary);
+}
+
+.nav-item svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 1.8;
+    flex-shrink: 0;
+}
+
+/* Sidebar Interaction Improvements */
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    border-radius: 10px;
+    transition:
+        background-color 160ms ease,
+        color 160ms ease,
+        transform 160ms ease;
+}
+
+.nav-item:hover {
+    background: #f0f4ff;
+    color: #244bc0;
+}
+
+.nav-item.selected {
+    background: #edf2ff;
+    box-shadow: inset 3px 0 0 #315ee7;
+}
+
+.nav-item:focus-visible {
+    outline: 2px solid #315ee7;
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nav-item {
+        transition: none;
+    }
+}

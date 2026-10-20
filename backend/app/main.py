@@ -1514,6 +1514,7 @@ def ask(
     assigned_subject_names = []
     course = None
     student_count = 0
+    specific_student_answer = None
     
     
     if user.role == "super_admin":
@@ -1636,6 +1637,356 @@ def ask(
                 models.Subject.name,
             )
         ).all()
+        
+        
+        
+        
+        
+        
+        # ---------------------------------------------------------
+        # Targeted student lookup for Super Admin queries.
+        # Retrieves verified records for an explicitly named student.
+        # ---------------------------------------------------------
+
+        student_id_match = re.search(
+            r"\b[A-Z]{2,8}\d{4,}\b",
+            data.question.upper(),
+        )
+
+        if student_id_match:
+            requested_student_number = student_id_match.group(0)
+
+            requested_student = db.scalar(
+                select(models.Student)
+                .where(
+                    func.upper(models.Student.student_number)
+                    == requested_student_number
+                )
+                .limit(1)
+            )
+
+            if requested_student is None:
+                context += (
+                    "\n\nVERIFIED STUDENT LOOKUP:\n"
+                    f"No student record matches "
+                    f"{requested_student_number}."
+                )
+
+                if question_terms & {
+                    "performance",
+                    "grade",
+                    "grades",
+                    "score",
+                    "scores",
+                    "mark",
+                    "marks",
+                    "result",
+                    "results",
+                    "progress",
+                    "academic",
+                    "attendance",
+                }:
+                    specific_student_answer = (
+                        "I couldn't find a student record with ID "
+                        f"**{requested_student_number}** "
+                        "in the university database."
+                    )
+
+            else:
+                requested_student_course = db.get(
+                    models.Course,
+                    requested_student.course_id,
+                )
+
+                # Retrieve published grades belonging to this student.
+                requested_student_grades = db.execute(
+                    select(
+                        models.Subject.name,
+                        models.Grade.assessment,
+                        models.Grade.score,
+                        models.Grade.max_score,
+                    )
+                    .join(
+                        models.Subject,
+                        models.Subject.id == models.Grade.subject_id,
+                    )
+                    .where(
+                        models.Grade.student_id == requested_student.id,
+                        models.Grade.published.is_(True),
+                    )
+                    .order_by(
+                        models.Subject.name,
+                        models.Grade.assessment,
+                    )
+                ).all()
+
+                # Retrieve attendance totals for each subject.
+                requested_student_attendance = db.execute(
+                    select(
+                        models.Subject.name,
+                        func.count(models.Attendance.id),
+                        func.sum(
+                            case(
+                                (
+                                    models.Attendance.present.is_(True),
+                                    1,
+                                ),
+                                else_=0,
+                            )
+                        ),
+                    )
+                    .join(
+                        models.Subject,
+                        models.Subject.id
+                        == models.Attendance.subject_id,
+                    )
+                    .where(
+                        models.Attendance.student_id
+                        == requested_student.id
+                    )
+                    .group_by(
+                        models.Subject.name,
+                    )
+                    .order_by(
+                        models.Subject.name,
+                    )
+                ).all()
+
+                # Format published grades without inventing missing marks.
+                grade_lines = []
+                total_score = 0.0
+                total_max_score = 0.0
+
+                for (
+                    subject_name,
+                    assessment,
+                    score,
+                    max_score,
+                ) in requested_student_grades:
+
+                    grade_text = (
+                        f"- {subject_name} — {assessment}: "
+                        f"{score}/{max_score}"
+                    )
+
+                    numeric_score = float(score or 0)
+                    numeric_max_score = float(max_score or 0)
+
+                    if numeric_max_score > 0:
+                        percentage = round(
+                            100 * numeric_score / numeric_max_score,
+                            1,
+                        )
+
+                        grade_text += f" ({percentage}%)"
+
+                        total_score += numeric_score
+                        total_max_score += numeric_max_score
+
+                    grade_lines.append(grade_text)
+
+                # Calculate overall attendance from recorded classes.
+                attendance_lines = []
+
+                total_classes = 0
+                total_present = 0
+
+                for (
+                    subject_name,
+                    subject_total,
+                    subject_present,
+                ) in requested_student_attendance:
+
+                    subject_total = int(subject_total or 0)
+                    subject_present = int(subject_present or 0)
+
+                    total_classes += subject_total
+                    total_present += subject_present
+
+                    percentage = (
+                        round(
+                            100 * subject_present / subject_total,
+                            1,
+                        )
+                        if subject_total
+                        else 0
+                    )
+
+                    attendance_lines.append(
+                        f"- {subject_name}: "
+                        f"{subject_present}/{subject_total} "
+                        f"classes ({percentage}%)"
+                    )
+
+                overall_attendance = (
+                    round(
+                        100 * total_present / total_classes,
+                        1,
+                    )
+                    if total_classes
+                    else None
+                )
+
+                # Include only verified records in the LLM context.
+                verified_student_context = [
+                    (
+                        "Student: "
+                        f"{requested_student.full_name}"
+                    ),
+                    (
+                        "Student ID: "
+                        f"{requested_student.student_number}"
+                    ),
+                    (
+                        "Course: "
+                        + (
+                            (
+                                f"{requested_student_course.name} "
+                                f"({requested_student_course.code})"
+                            )
+                            if requested_student_course
+                            else "Course information unavailable"
+                        )
+                    ),
+                    f"Year: {requested_student.year}",
+                    (
+                        "Overall attendance: "
+                        + (
+                            f"{overall_attendance}% "
+                            f"({total_present}/{total_classes} classes)"
+                            if overall_attendance is not None
+                            else "No attendance records"
+                        )
+                    ),
+                    "Published grades:",
+                    (
+                        "\n".join(grade_lines)
+                        if grade_lines
+                        else "No published grade records found."
+                    ),
+                    "Attendance by subject:",
+                    (
+                        "\n".join(attendance_lines)
+                        if attendance_lines
+                        else "No attendance records found."
+                    ),
+                ]
+
+                context += (
+                    "\n\nVERIFIED STUDENT-SPECIFIC CONTEXT:\n"
+                    + "\n".join(verified_student_context)
+                )
+
+                # Give factual student-performance answers directly
+                # from verified database records.
+                performance_question = bool(
+                    question_terms
+                    & {
+                        "performance",
+                        "grade",
+                        "grades",
+                        "score",
+                        "scores",
+                        "mark",
+                        "marks",
+                        "result",
+                        "results",
+                        "progress",
+                        "academic",
+                        "attendance",
+                    }
+                )
+
+                if performance_question:
+                    response_lines = [
+                        (
+                            "### Academic Performance — "
+                            f"{requested_student.full_name}"
+                        ),
+                        "",
+                        (
+                            f"**Student ID:** "
+                            f"{requested_student.student_number}"
+                        ),
+                        (
+                            "**Course:** "
+                            + (
+                                (
+                                    f"{requested_student_course.name} "
+                                    f"({requested_student_course.code})"
+                                )
+                                if requested_student_course
+                                else "Course information unavailable"
+                            )
+                        ),
+                        f"**Year:** {requested_student.year}",
+                        "",
+                        "### Attendance",
+                    ]
+
+                    if overall_attendance is not None:
+                        response_lines.append(
+                            f"- Overall attendance: "
+                            f"**{overall_attendance}%** "
+                            f"({total_present}/{total_classes} classes)"
+                        )
+                    else:
+                        response_lines.append(
+                            "- No attendance records are available."
+                        )
+
+                    response_lines.extend(
+                        [
+                            "",
+                            "### Published Grades",
+                        ]
+                    )
+
+                    if grade_lines:
+                        response_lines.extend(grade_lines)
+                    else:
+                        response_lines.append(
+                            "No published grade records are available."
+                        )
+
+                    if total_max_score > 0:
+                        combined_percentage = round(
+                            100 * total_score / total_max_score,
+                            1,
+                        )
+
+                        response_lines.extend(
+                            [
+                                "",
+                                (
+                                    "**Combined percentage across "
+                                    "published grade records:** "
+                                    f"{combined_percentage}%"
+                                ),
+                            ]
+                        )
+
+                    response_lines.extend(
+                        [
+                            "",
+                            (
+                                "This summary uses the published grade "
+                                "and attendance records currently available "
+                                "in the database."
+                            ),
+                        ]
+                    )
+
+                    specific_student_answer = "\n".join(
+                        response_lines
+                    )
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -2924,8 +3275,12 @@ def ask(
             for exam, subject in upcoming_rows
         )
     
+    
     if authorization_denied:
         answer = academic_response
+
+    elif specific_student_answer is not None:
+        answer = specific_student_answer
 
     elif settings.ai_api_key and settings.ai_model:
         try:
@@ -2934,15 +3289,22 @@ def ask(
                 role=str(user.role),
                 campus_context={
                     "authorized_campus_context": (
-                        context or "No matching authoritative campus data was found."
+                        context
+                        or "No matching authoritative campus data was found."
                     ),
                     "verified_academic_answer": formatted_academic_answer,
                 },
                 history=[
-                    {"role": message.role, "content": message.content}
+                    {
+                        "role": message.role,
+                        "content": message.content,
+                    }
                     for message in history
                 ],
             )
+    
+    
+    
         except CampusAIError as exc:
             logging.warning("Campus Mind AI request failed: %s", str(exc))
             if academic_response:

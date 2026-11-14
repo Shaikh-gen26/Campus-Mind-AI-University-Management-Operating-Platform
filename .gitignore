@@ -24,3 +24,12 @@ backend/seed_data/submissions.csv.before_ce_fix
 .vscode/
 .DS_Store
 Thumbs.db
+.vercel
+.env*
+
+# Keep environment templates tracked
+!.env.example
+!**/.env.example
+
+# Local migration backups
+backend/migration_backups/

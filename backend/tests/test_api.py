@@ -5,7 +5,18 @@ from fastapi.testclient import TestClient
 from sqlalchemy import select
 from app.database import Base, engine, SessionLocal
 from app.main import app
-from app.models import Attendance, Course, Grade, Student, Subject, User
+
+from app.models import (
+    Attendance,
+    Course,
+    Grade,
+    Student,
+    Subject,
+    TeacherSubject,
+    User,
+)
+
+
 from datetime import date
 from app.security import hash_password
 
@@ -72,8 +83,19 @@ def setup_function():
         db.flush()
         cse_subject = db.scalar(select(Subject).where(Subject.code == "CSE01"))
         it_subject = db.scalar(select(Subject).where(Subject.code == "IT01"))
+
+        teacher = db.scalar(select(User).where(User.login == "teacher"))
+
+        db.add(
+            TeacherSubject(
+                teacher_id=teacher.id,
+                subject_id=cse_subject.id,
+            )
+        )
+
         db.add_all(
             [
+        
                 Attendance(
                     student_id=s2.id,
                     subject_id=it_subject.id,

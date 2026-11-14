@@ -56,7 +56,17 @@ def current_user(
         )
         if not token:
             raise ValueError("Missing credentials")
-        claims = jwt.decode(token, settings.jwt_secret, algorithms=["HS256"])
+        
+        claims = jwt.decode(
+            token,
+            settings.jwt_secret,
+            algorithms=["HS256"],
+            options={
+                "require": ["sub", "ver", "iat", "exp"],
+            },
+        )
+        
+        
         uid = int(claims["sub"])
     except (jwt.PyJWTError, KeyError, ValueError):
         raise error

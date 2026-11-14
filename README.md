@@ -1,4 +1,4 @@
-# Campus Mind AI — Intelligent University Operating System
+# Campus Mind AI — Intelligent University Operating Platform
 
 Campus Mind AI brings university administration and academic workflows into one authenticated application. The web client uses a Python FastAPI service, relational database, role based access rules, and a university knowledge assistant.
 

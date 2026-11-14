@@ -33,3 +33,5 @@ Thumbs.db
 
 # Local migration backups
 backend/migration_backups/
+
+/backend/seed_data/

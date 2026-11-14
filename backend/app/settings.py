@@ -29,6 +29,15 @@ class Settings(BaseSettings):
         return value
     
     
+    @field_validator("database_url", mode="before")
+    @classmethod
+    def normalize_database_url(cls, value: str) -> str:
+        if isinstance(value, str) and value.startswith("postgres://"):
+            return "postgresql+psycopg://" + value[len("postgres://"):]
+        return value
+    
+    
+    
     @field_validator("app_env")
     @classmethod
     def validate_app_env(cls, value: str) -> str:

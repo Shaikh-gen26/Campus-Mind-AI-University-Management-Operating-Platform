@@ -41,8 +41,6 @@ class Settings(BaseSettings):
             return "postgresql+psycopg://" + value[len("postgresql://"):]
 
         return value
-    
-    
     @field_validator("app_env")
     @classmethod
     def validate_app_env(cls, value: str) -> str:

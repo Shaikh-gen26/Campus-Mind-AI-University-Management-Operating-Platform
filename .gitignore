@@ -24,3 +24,12 @@ backend/seed_data/submissions.csv.before_ce_fix
 .vscode/
 .DS_Store
 Thumbs.db
+.vercel
+.env*
+
+# Private deployment and migration data
+backend/seed_data/
+backend/migration_backups/
+.vercel/
+
+!.env.example

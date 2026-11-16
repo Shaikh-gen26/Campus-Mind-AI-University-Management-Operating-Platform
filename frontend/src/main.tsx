@@ -1037,7 +1037,7 @@ const lowRiskCount =
           </div>
           <div>
             <b>Campus Mind</b>
-            <small>Intelligent University OS</small>
+            <small>Intelligent University OP</small>
           </div>
         </div>
         <div className="nav-label">WORKSPACE</div>

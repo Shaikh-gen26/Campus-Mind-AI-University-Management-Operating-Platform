@@ -886,7 +886,7 @@ function App() {
           <div className="brand-mark">
             <GraduationCap />
           </div>
-          <p className="eyebrow">UNIVERSITY OPERATING SYSTEM</p>
+          <p className="eyebrow">UNIVERSITY OPERATING PLATFORM</p>
           <h1>Welcome to Campus Mind</h1>
           <p className="muted">Sign in with your university account.</p>
           <label>
